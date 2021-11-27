@@ -73,9 +73,6 @@ public class SkyCryptDatabase implements IDatabase {
                 return key;
             }
         }
-        if(keys.toArray().length == 0) {
-            throw new DatabaseException("Couldn't find the profile '"+profileName+"'");
-        }
-        return (String) keys.toArray()[0];
+        throw new DatabaseException("Couldn't find the profile '"+profileName+"'");
     }
 }

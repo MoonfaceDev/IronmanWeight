@@ -33,11 +33,14 @@ public class CatacombsField extends Field<Double> {
             totalXP -= EXPERIENCE_REQUIRED[level];
             level++;
         }
+        if(level == EXPERIENCE_REQUIRED.length) {
+            totalXP = 0;
+        }
         return level+totalXP/EXPERIENCE_REQUIRED[level-1];
     }
 
     public double getOverflow() {
-        int totalSkillXP = 0;
+        double totalSkillXP = 0;
         for (int requiredXP : EXPERIENCE_REQUIRED) {
             totalSkillXP += requiredXP;
         }
