@@ -1,7 +1,11 @@
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.MessageBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.text.DecimalFormat;
 
 public class BotListenerAdapter extends ListenerAdapter {
@@ -23,7 +27,15 @@ public class BotListenerAdapter extends ListenerAdapter {
             String profileName = words[2];
             SkyblockProfile player = database.getProfile(playerName, profileName);
             double weight = player.getTotalWeight();
-            event.getChannel().sendMessage(playerName+"'s weight is "+weightFormat.format(weight)).queue();
+            String response = "### "+playerName+" | "+profileName+
+                    "\n**Total Weight:** "+weightFormat.format(weight)+"\n"+
+                    "\n**Catacombs:** "+weightFormat.format(player.catacombs.getWeight())+
+                    "\n**Talismans:** "+weightFormat.format(player.missingTalismans.getWeight()-player.missingTalismanUpgrades.getWeight());
+            event.getChannel().sendMessageEmbeds(new EmbedBuilder()
+                            .setDescription(response)
+                            .setColor(Color.decode("#304ffe"))
+                            .build()
+            ).queue();
         }
     }
 }
