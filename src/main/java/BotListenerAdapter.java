@@ -27,8 +27,8 @@ public class BotListenerAdapter extends ListenerAdapter {
             String profileName = words[2];
             SkyblockProfile player = database.getProfile(playerName, profileName);
             double weight = player.getTotalWeight();
-            String response = "> **"+playerName+" | "+profileName+"**"+
-                    "\nTotal Weight: "+weightFormat.format(weight)+"\n"+
+            String response = ":pick: "+playerName+" | "+profileName+""+
+                    "\n**Total Weight:** "+weightFormat.format(weight)+"\n"+
                     "\n**Catacombs:** "+weightFormat.format(player.catacombs.getWeight())+
                     "\n**Talismans:** "+weightFormat.format(player.missingTalismans.getWeight()+player.missingTalismanUpgrades.getWeight());
             event.getChannel().sendMessageEmbeds(new EmbedBuilder()
