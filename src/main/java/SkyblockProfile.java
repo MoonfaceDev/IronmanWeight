@@ -199,6 +199,9 @@ public class SkyblockProfile {
         for(ItemField itemField : getItemFields()) {
             total += itemField.getWeight();
         }
+        for(PetField petField : getPetFields()) {
+            total += petField.getWeight();
+        }
         return total;
     }
 
