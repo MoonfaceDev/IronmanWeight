@@ -4,11 +4,8 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
-import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.time.Instant;
-import java.time.temporal.TemporalAccessor;
-import java.util.Date;
 
 public class BotListenerAdapter extends ListenerAdapter {
 
@@ -27,7 +24,14 @@ public class BotListenerAdapter extends ListenerAdapter {
         if(words.length == 3 && words[0].startsWith("/ironweight")) {
             String playerName = words[1];
             String profileName = words[2];
-            SkyblockProfile player = database.getProfile(playerName, profileName);
+            SkyblockProfile player = null;
+            try {
+                player = database.getProfile(playerName, profileName);
+            } catch (DatabaseException e) {
+                String response = getErrorMessage(playerName, profileName, e.getMessage());
+                sendResponse(event, response);
+                return;
+            }
             double weight = player.getTotalWeight();
             String response = ":pick: "+playerName+" | "+profileName+""+
                     "\n**Total Weight:** "+weightFormat.format(weight)+"\n"+
@@ -52,13 +56,22 @@ public class BotListenerAdapter extends ListenerAdapter {
                     "\n**Gemstone Powder:** "+weightFormat.format(player.gemstonePowder.getWeight())+
                     "\n**Pet Score:** "+weightFormat.format(player.petScore.getWeight())+
                     "\n**Minion Slots:** "+weightFormat.format(player.minionSlots.getWeight());
-            event.getChannel().sendMessageEmbeds(new EmbedBuilder()
-                            .setDescription(response)
-                            .setColor(Color.decode("#304ffe"))
-                            .setFooter("Ironman Weight • Created By nomface")
-                            .setTimestamp(Instant.now())
-                            .build()
-            ).queue();
+            sendResponse(event, response);
         }
+    }
+
+    private String getErrorMessage(String playerName, String profileName, String errorMessage) {
+        return ":pick: "+playerName+" | "+profileName+""+
+                "\n**Error:** "+errorMessage;
+    }
+
+    private void sendResponse(MessageReceivedEvent event, String response) {
+        event.getChannel().sendMessageEmbeds(new EmbedBuilder()
+                .setDescription(response)
+                .setColor(Color.decode("#304ffe"))
+                .setFooter("Ironman Weight • Created By nomface")
+                .setTimestamp(Instant.now())
+                .build()
+        ).queue();
     }
 }

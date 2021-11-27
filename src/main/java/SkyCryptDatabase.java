@@ -5,9 +5,7 @@ import fields.ItemField;
 import fields.PetField;
 import net.minidev.json.JSONArray;
 
-import javax.print.Doc;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,17 +19,19 @@ public class SkyCryptDatabase implements IDatabase {
     }
 
     @Override
-    public SkyblockProfile getProfile(String playerName, String profileName) {
+    public SkyblockProfile getProfile(String playerName, String profileName) throws DatabaseException {
         try {
             String rawData = getAPIRaw(playerName);
+            if(((Map<String, Object>)JsonPath.parse(rawData).read("@")).containsKey("error")) {
+                throw new DatabaseException("Couldn't find the player '"+playerName+"'");
+            }
             return getProfileFromMap(rawData, profileName);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DatabaseException("Could not retrieve API data");
         }
-        return null;
     }
 
-    private SkyblockProfile getProfileFromMap(String rawData, String profileName) {
+    private SkyblockProfile getProfileFromMap(String rawData, String profileName) throws DatabaseException {
         DocumentContext document = JsonPath.parse(rawData);
         String profileID = getProfileIDByName(document, profileName);
         SkyblockProfile skyblockProfile = new SkyblockProfile();
@@ -65,13 +65,16 @@ public class SkyCryptDatabase implements IDatabase {
         return null;
     }
 
-    private String getProfileIDByName(DocumentContext jsonDocument, String profileName) {
+    private String getProfileIDByName(DocumentContext jsonDocument, String profileName) throws DatabaseException {
         Set<String> keys = ((Map<String, Object>) jsonDocument.read("$.profiles")).keySet();
         for(String key : keys) {
             Map<String, Object> jsonProfile = jsonDocument.read("$.profiles."+key);
             if(jsonProfile.get("cute_name").toString().equalsIgnoreCase(profileName)) {
                 return key;
             }
+        }
+        if(keys.toArray().length == 0) {
+            throw new DatabaseException("Couldn't find the profile '"+profileName+"'");
         }
         return (String) keys.toArray()[0];
     }
