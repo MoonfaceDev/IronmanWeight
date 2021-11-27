@@ -187,8 +187,42 @@ public class SkyblockProfile {
         return pets;
     }
 
+    public double getPetsWeight() {
+        double total = 0;
+        for(PetField petField : getPetFields()) {
+            total += petField.getWeight();
+        }
+        return total;
+    }
+
     public ItemField[] getItemFields() {
         return items;
+    }
+
+    public double getItemsWeight() {
+        double total = 0;
+        for(ItemField itemField : getItemFields()) {
+            total += itemField.getWeight();
+        }
+        return total;
+    }
+
+    public double getSkillsWeight() {
+        double total = 0;
+        Field<?>[] skillFields = new Field[]{taming, farming, mining, combat, foraging, fishing, enchanting, alchemy};
+        for(Field<?> skill : skillFields) {
+            total += skill.getWeight();
+        }
+        return total;
+    }
+
+    public double getSlayersWeight() {
+        double total = 0;
+        Field<?>[] slayerFields = new Field[]{zombie, spider, wolf, enderman};
+        for(Field<?> slayer : slayerFields) {
+            total += slayer.getWeight();
+        }
+        return total;
     }
 
     public double getTotalWeight() {
@@ -196,12 +230,8 @@ public class SkyblockProfile {
         for(Field<?> field : getFields()) {
             total += field.getWeight();
         }
-        for(ItemField itemField : getItemFields()) {
-            total += itemField.getWeight();
-        }
-        for(PetField petField : getPetFields()) {
-            total += petField.getWeight();
-        }
+        total += getItemsWeight();
+        total += getPetsWeight();
         return total;
     }
 
