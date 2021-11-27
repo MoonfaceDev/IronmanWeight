@@ -47,11 +47,11 @@ public class BotListenerAdapter extends ListenerAdapter {
                     "\n - Wolf: "+weightFormat.format(player.wolf.getWeight())+
                     "\n - Enderman: "+weightFormat.format(player.enderman.getWeight())+
                     "\n**Items:** "+weightFormat.format(player.getItemsWeight()+player.getPetsWeight())+
-                    "\n**Talismans:** "+weightFormat.format(player.missingTalismans.getWeight()+player.missingTalismanUpgrades.getWeight()+
+                    "\n**Talismans:** "+weightFormat.format(player.missingTalismans.getWeight()+player.missingTalismanUpgrades.getWeight())+
                     "\n**Mithril Powder:** "+weightFormat.format(player.mithrilPowder.getWeight())+
                     "\n**Gemstone Powder:** "+weightFormat.format(player.gemstonePowder.getWeight())+
                     "\n**Pet Score:** "+weightFormat.format(player.petScore.getWeight())+
-                    "\n**Minion Slots:** "+weightFormat.format(player.minionSlots.getWeight()));
+                    "\n**Minion Slots:** "+weightFormat.format(player.minionSlots.getWeight());
             event.getChannel().sendMessageEmbeds(new EmbedBuilder()
                             .setDescription(response)
                             .setColor(Color.decode("#304ffe"))
