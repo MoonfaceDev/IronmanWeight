@@ -23,7 +23,7 @@ public class SlayerField extends Field<Integer> {
     }
 
     public double getLevel() {
-        Double totalXP = Double.valueOf(value);
+        double totalXP = value;
         int level = 0;
         while (level < EXPERIENCE_REQUIRED.length && totalXP >= EXPERIENCE_REQUIRED[level]) {
             totalXP -= EXPERIENCE_REQUIRED[level];
@@ -36,7 +36,7 @@ public class SlayerField extends Field<Integer> {
     }
 
     public double getOverflow() {
-        Double totalSkillXP = 0d;
+        double totalSkillXP = 0d;
         for (int requiredXP : EXPERIENCE_REQUIRED) {
             totalSkillXP += requiredXP;
         }

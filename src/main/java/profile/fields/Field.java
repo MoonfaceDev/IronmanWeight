@@ -11,6 +11,7 @@ public abstract class Field <T> {
     public abstract double getWeight();
 
     public void setValue(T value) {
+        System.out.println(value);
         this.value = value;
     }
 
