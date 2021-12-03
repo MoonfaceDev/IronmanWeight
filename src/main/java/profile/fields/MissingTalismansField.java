@@ -22,6 +22,7 @@ public class MissingTalismansField extends Field<List<Map<String, String>>>{
                 case "legendary" -> weight -= 5;
             }
         }
+        System.out.println(weight);
         return 2d*weight;
     }
 }

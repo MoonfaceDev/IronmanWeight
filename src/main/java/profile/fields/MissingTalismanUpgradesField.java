@@ -12,6 +12,7 @@ public class MissingTalismanUpgradesField extends Field<List<Map<String, String>
 
     @Override
     public double getWeight() {
+        System.out.println(value.size());
         return -2d*value.size();
     }
 
