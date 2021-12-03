@@ -33,7 +33,7 @@ public class SkillField extends Field<Double>{
     }
 
     public double getLevel() {
-        Logger.getLogger(SkillField.class.getName()).info(value.toString());
+        System.out.println(value);
         double totalXP = value;
         int level = 0;
         while (level < EXPERIENCE_REQUIRED.length && totalXP >= EXPERIENCE_REQUIRED[level]) {
