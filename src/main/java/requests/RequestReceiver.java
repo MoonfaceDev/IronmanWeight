@@ -22,7 +22,7 @@ public class RequestReceiver implements IRequestReceiver {
     @Override
     public void onNewRequest(MessageReceivedEvent event) {
         String request = event.getMessage().getContentRaw();
-        if(!request.startsWith("/ironweight ")){
+        if(!isBotRequest(request)){
             return;
         }
         String response;
@@ -36,6 +36,10 @@ public class RequestReceiver implements IRequestReceiver {
         }
         MessageChannel channel = event.getChannel();
         this.responseSender.sendResponse(channel, response);
+    }
+
+    private boolean isBotRequest(String request) {
+        return request.startsWith(RequestParser.REQUEST_COMMAND+" ");
     }
 
     private String getErrorMessage(String playerName, String profileName, String errorMessage) {

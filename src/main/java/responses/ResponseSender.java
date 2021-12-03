@@ -8,12 +8,15 @@ import java.time.Instant;
 
 public class ResponseSender implements IResponseSender {
 
+    private static final Color messageColor = Color.decode("#304ffe");
+    private static final String messageFooter = "Ironman Weight • Created By nomface";
+
     @Override
     public void sendResponse(MessageChannel channel, String response) {
         channel.sendMessageEmbeds(new EmbedBuilder()
                 .setDescription(response)
-                .setColor(Color.decode("#304ffe"))
-                .setFooter("Ironman Weight • Created By nomface")
+                .setColor(messageColor)
+                .setFooter(messageFooter)
                 .setTimestamp(Instant.now())
                 .build()
         ).queue();

@@ -1,4 +1,4 @@
-package fields;
+package profile.fields;
 
 import net.minidev.json.JSONArray;
 

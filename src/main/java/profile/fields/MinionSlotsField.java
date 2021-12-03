@@ -1,4 +1,4 @@
-package fields;
+package profile.fields;
 
 public class MinionSlotsField extends Field<Integer> {
     public MinionSlotsField(String jsonPath) {

@@ -1,4 +1,4 @@
-package fields;
+package profile.fields;
 
 public class SlayerField extends Field<Integer> {
 

@@ -26,20 +26,20 @@ public class HttpGetRequest {
     }
 
     private String receiveResponse(HttpURLConnection connection) throws IOException {
-        InputStream is = connection.getInputStream();
-        BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-        StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
+        InputStream stream = connection.getInputStream();
+        BufferedReader buffer = new BufferedReader(new InputStreamReader(stream));
+        StringBuilder response = new StringBuilder();
         String line;
-        while ((line = rd.readLine()) != null) {
+        while ((line = buffer.readLine()) != null) {
             response.append(line);
             response.append('\r');
         }
-        rd.close();
+        buffer.close();
         return response.toString();
     }
 
     private void sendRequest(HttpURLConnection connection) throws IOException {
-        DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-        wr.close();
+        DataOutputStream stream = new DataOutputStream(connection.getOutputStream());
+        stream.close();
     }
 }

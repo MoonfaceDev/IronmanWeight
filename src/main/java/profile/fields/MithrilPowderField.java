@@ -1,4 +1,4 @@
-package fields;
+package profile.fields;
 
 public class MithrilPowderField extends Field<Integer>{
     public MithrilPowderField(String jsonPath) {

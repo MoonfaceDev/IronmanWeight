@@ -1,6 +1,6 @@
 package profile;
 
-import fields.*;
+import profile.fields.*;
 
 public class SkyblockProfile {
 
