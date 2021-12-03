@@ -1,6 +1,6 @@
 package profile.fields;
 
-public class SkillField extends Field<Double>{
+public class SkillField extends Field<Number>{
 
     public static final int[] EXPERIENCE_REQUIRED = {
             50, 125, 200, 300, 500, 750, 1000, 1500, 2000, 3500,
@@ -31,7 +31,7 @@ public class SkillField extends Field<Double>{
     }
 
     public double getLevel() {
-        double totalXP = value;
+        double totalXP = value.doubleValue();
         int level = 0;
         while (level < EXPERIENCE_REQUIRED.length && totalXP >= EXPERIENCE_REQUIRED[level]) {
             totalXP -= EXPERIENCE_REQUIRED[level];
@@ -48,6 +48,6 @@ public class SkillField extends Field<Double>{
         for (int requiredXP : EXPERIENCE_REQUIRED) {
             totalSkillXP += requiredXP;
         }
-        return Math.max(0, value-totalSkillXP);
+        return Math.max(0, value.doubleValue()-totalSkillXP);
     }
 }

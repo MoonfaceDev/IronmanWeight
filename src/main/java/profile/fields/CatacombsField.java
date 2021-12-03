@@ -1,6 +1,6 @@
 package profile.fields;
 
-public class CatacombsField extends Field<Double> {
+public class CatacombsField extends Field<Number> {
 
     public static final int[] EXPERIENCE_REQUIRED = {
             50, 75, 110, 160, 230, 330, 470, 670, 950, 1340,
@@ -28,7 +28,7 @@ public class CatacombsField extends Field<Double> {
     }
 
     public double getLevel() {
-        double totalXP = value;
+        double totalXP = value.doubleValue();
         int level = 0;
         while (level < EXPERIENCE_REQUIRED.length && totalXP >= EXPERIENCE_REQUIRED[level]) {
             totalXP -= EXPERIENCE_REQUIRED[level];
@@ -45,6 +45,6 @@ public class CatacombsField extends Field<Double> {
         for (int requiredXP : EXPERIENCE_REQUIRED) {
             totalSkillXP += requiredXP;
         }
-        return Math.max(0, value-totalSkillXP);
+        return Math.max(0, value.doubleValue()-totalSkillXP);
     }
 }
