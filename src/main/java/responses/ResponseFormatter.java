@@ -11,7 +11,7 @@ public class ResponseFormatter implements IResponseFormatter {
     @Override
     public String format(SkyblockProfile profile) {
         double weight = profile.getTotalWeight();
-        return ":pick: " + profile.playerName + " | " + profile.profileName + getGameModeEmoji(profile.gameMode) +
+        return ":pick: " + profile.playerName + " | " + profile.profileName + " " + getGameModeEmoji(profile.gameMode) +
                 "\n**Total Weight:** " + weightFormat.format(weight) + "\n" +
                 "\n**Skills:** " + weightFormat.format(profile.getSkillsWeight()) +
                 "\n - Taming: " + weightFormat.format(profile.taming.getWeight()) +
