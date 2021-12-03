@@ -16,6 +16,7 @@ public class SkillField extends Field<Double>{
     public SkillField(String jsonPath, int max) {
         super(jsonPath);
         this.max = max;
+        this.value = 0d;
     }
 
     @Override

@@ -3,6 +3,7 @@ package profile.fields;
 public class GemstonePowderField extends Field<Integer>{
     public GemstonePowderField(String jsonPath) {
         super(jsonPath);
+        this.value = 0;
     }
 
     @Override

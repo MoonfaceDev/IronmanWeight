@@ -1,10 +1,13 @@
 package profile.fields;
 
-import net.minidev.json.JSONArray;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-public class MissingTalismanUpgradesField extends Field<JSONArray>{
+public class MissingTalismanUpgradesField extends Field<List<Map<String, String>>>{
     public MissingTalismanUpgradesField(String jsonPath) {
         super(jsonPath);
+        this.value = new ArrayList<>();
     }
 
     @Override

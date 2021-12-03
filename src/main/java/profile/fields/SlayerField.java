@@ -9,6 +9,7 @@ public class SlayerField extends Field<Integer> {
     public SlayerField(String jsonPath, int max) {
         super(jsonPath);
         this.max = max;
+        this.value = 0;
     }
 
     @Override

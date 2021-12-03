@@ -11,6 +11,7 @@ public class ItemField extends Field<Boolean> {
         this.jsonPaths = jsonPaths;
         this.itemID = itemID;
         this.weight = weight;
+        this.value = false;
     }
 
     public ItemField(String jsonPath, String itemID, int weight) {

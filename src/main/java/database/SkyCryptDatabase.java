@@ -2,11 +2,12 @@ package database;
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.PathNotFoundException;
+import net.minidev.json.JSONArray;
+import profile.SkyblockProfile;
 import profile.fields.Field;
 import profile.fields.ItemField;
 import profile.fields.PetField;
-import net.minidev.json.JSONArray;
-import profile.SkyblockProfile;
 import utils.HttpGetRequest;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class SkyCryptDatabase implements IDatabase {
     private static final String PROFILE_CURRENT_KEY = "current";
 
     public static String getAPIRaw(String playerName) throws IOException {
-        HttpGetRequest request = new HttpGetRequest(SKY_CRYPT_URL+playerName);
+        HttpGetRequest request = new HttpGetRequest(SKY_CRYPT_URL + playerName);
         return request.get();
     }
 
@@ -36,15 +37,15 @@ public class SkyCryptDatabase implements IDatabase {
         try {
             String rawData = getAPIRaw(playerName);
             DocumentContext document = JsonPath.parse(rawData);
-            if(hasErrorKey(document)) {
-                throw new DatabaseException(playerName, profileName, "Couldn't find the player '"+playerName+"'");
+            if (hasErrorKey(document)) {
+                throw new DatabaseException(playerName, profileName, "Couldn't find the player '" + playerName + "'");
             }
-            if(profileName == null) {
+            if (profileName == null) {
                 profileName = getCurrentProfileName(document);
             }
             SkyblockProfile profile = getProfileFromDocument(document, playerName, profileName);
-            if(profile == null) {
-                throw new DatabaseException(playerName, profileName, "Couldn't find the profile '"+profileName+"'");
+            if (profile == null) {
+                throw new DatabaseException(playerName, profileName, "Couldn't find the profile '" + profileName + "'");
             }
             return profile;
         } catch (IOException e) {
@@ -55,9 +56,9 @@ public class SkyCryptDatabase implements IDatabase {
     private String getCurrentProfileName(DocumentContext document) {
         Map<String, Object> profileMap = document.read("$.profiles");
         Set<String> keys = profileMap.keySet();
-        for(String key : keys) {
-            Map<String, Object> jsonProfile = document.read("$.profiles."+key);
-            if((boolean) jsonProfile.get(PROFILE_CURRENT_KEY)) {
+        for (String key : keys) {
+            Map<String, Object> jsonProfile = document.read("$.profiles." + key);
+            if ((boolean) jsonProfile.get(PROFILE_CURRENT_KEY)) {
                 return jsonProfile.get(PROFILE_NAME_KEY).toString();
             }
         }
@@ -78,7 +79,11 @@ public class SkyCryptDatabase implements IDatabase {
         skyblockProfile.playerName = playerName;
         skyblockProfile.profileName = profileName;
         for (Field<?> field : skyblockProfile.getFields()) {
-            field.setValue(document.read("$.profiles." + profileID + "." + field.jsonPath));
+            try {
+                field.setValue(document.read("$.profiles." + profileID + "." + field.jsonPath));
+            } catch (PathNotFoundException ignored) {
+
+            }
         }
         for (ItemField itemField : skyblockProfile.getItemFields()) {
             itemField.setValue(hasItem(document, profileID, itemField.jsonPaths, itemField.itemID));
@@ -91,8 +96,8 @@ public class SkyCryptDatabase implements IDatabase {
 
 
     private boolean hasItem(DocumentContext document, String profileID, String[] jsonPaths, String itemID) {
-        for(String jsonPath : jsonPaths) {
-            if(document.read("$.profiles." + profileID + "." + jsonPath + "[*][?(@.tag.ExtraAttributes.id == \""+itemID+"\")]", JSONArray.class).size() > 0) {
+        for (String jsonPath : jsonPaths) {
+            if (document.read("$.profiles." + profileID + "." + jsonPath + "[*][?(@.tag.ExtraAttributes.id == \"" + itemID + "\")]", JSONArray.class).size() > 0) {
                 return true;
             }
         }
@@ -101,8 +106,8 @@ public class SkyCryptDatabase implements IDatabase {
 
     private Map<String, Object> getPet(DocumentContext document, String profileID, String jsonPath, String petID) {
         List<Map<String, Object>> matchingArray =
-                document.read("$.profiles." + profileID + "." + jsonPath + "[*][?(@.type == \""+petID+"\")]");
-        if(matchingArray.size() > 0) {
+                document.read("$.profiles." + profileID + "." + jsonPath + "[*][?(@.type == \"" + petID + "\")]");
+        if (matchingArray.size() > 0) {
             return matchingArray.get(0);
         }
         return null;
@@ -111,9 +116,9 @@ public class SkyCryptDatabase implements IDatabase {
     private String getProfileIDByName(DocumentContext document, String profileName) {
         Map<String, Object> profileMap = document.read("$.profiles");
         Set<String> keys = profileMap.keySet();
-        for(String key : keys) {
-            Map<String, Object> jsonProfile = document.read("$.profiles."+key);
-            if(jsonProfile.get(PROFILE_NAME_KEY).toString().equalsIgnoreCase(profileName)) {
+        for (String key : keys) {
+            Map<String, Object> jsonProfile = document.read("$.profiles." + key);
+            if (jsonProfile.get(PROFILE_NAME_KEY).toString().equalsIgnoreCase(profileName)) {
                 return key;
             }
         }

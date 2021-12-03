@@ -3,6 +3,7 @@ package profile.fields;
 public class MithrilPowderField extends Field<Integer>{
     public MithrilPowderField(String jsonPath) {
         super(jsonPath);
+        this.value = 0;
     }
 
     @Override

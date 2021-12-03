@@ -12,6 +12,7 @@ public class CatacombsField extends Field<Double> {
 
     public CatacombsField(String jsonPath) {
         super(jsonPath);
+        this.value = 0d;
     }
 
     @Override

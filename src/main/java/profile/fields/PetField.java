@@ -11,6 +11,7 @@ public class PetField extends Field<Map<String, Object>>{
         super(jsonPath);
         this.petID = petID;
         this.tierWeights = tierWeights;
+        this.value = null;
     }
 
     @Override
