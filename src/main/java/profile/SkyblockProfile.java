@@ -6,6 +6,7 @@ public class SkyblockProfile {
 
     public String playerName;
     public String profileName;
+    public String gameMode;
 
     //ADD NEW FIELD
     public CatacombsField catacombs = new CatacombsField("data.dungeons.catacombs.level.xp");

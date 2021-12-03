@@ -11,7 +11,7 @@ public class ResponseFormatter implements IResponseFormatter {
     @Override
     public String format(SkyblockProfile profile) {
         double weight = profile.getTotalWeight();
-        return ":pick: " + profile.playerName + " | " + profile.profileName + "" +
+        return ":pick: " + profile.playerName + " | " + profile.profileName + getGameModeEmoji(profile.gameMode) +
                 "\n**Total Weight:** " + weightFormat.format(weight) + "\n" +
                 "\n**Skills:** " + weightFormat.format(profile.getSkillsWeight()) +
                 "\n - Taming: " + weightFormat.format(profile.taming.getWeight()) +
@@ -34,5 +34,13 @@ public class ResponseFormatter implements IResponseFormatter {
                 "\n**Gemstone Powder:** " + weightFormat.format(profile.gemstonePowder.getWeight()) +
                 "\n**Pet Score:** " + weightFormat.format(profile.petScore.getWeight()) +
                 "\n**Minion Slots:** " + weightFormat.format(profile.minionSlots.getWeight());
+    }
+
+    private String getGameModeEmoji(String gameMode) {
+        return switch (gameMode) {
+            case "ironman" -> ":recycle:";
+            case "bingo" -> "Ⓑ";
+            default -> "";
+        };
     }
 }

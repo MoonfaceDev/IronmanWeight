@@ -78,6 +78,7 @@ public class SkyCryptDatabase implements IDatabase {
         SkyblockProfile skyblockProfile = new SkyblockProfile();
         skyblockProfile.playerName = playerName;
         skyblockProfile.profileName = profileName;
+        skyblockProfile.gameMode = document.read("$.profiles."+profileID+".data.profile.game_mode");
         for (Field<?> field : skyblockProfile.getFields()) {
             try {
                 field.setValue(document.read("$.profiles." + profileID + "." + field.jsonPath));
