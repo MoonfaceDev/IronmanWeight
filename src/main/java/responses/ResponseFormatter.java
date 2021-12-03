@@ -37,6 +37,9 @@ public class ResponseFormatter implements IResponseFormatter {
     }
 
     private String getGameModeEmoji(String gameMode) {
+        if(gameMode == null) {
+            return "";
+        }
         return switch (gameMode) {
             case "ironman" -> ":recycle:";
             case "bingo" -> "Ⓑ";
