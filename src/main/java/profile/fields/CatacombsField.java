@@ -28,7 +28,7 @@ public class CatacombsField extends Field<Double> {
     }
 
     public double getLevel() {
-        double totalXP = value;
+        Double totalXP = value;
         int level = 0;
         while (level < EXPERIENCE_REQUIRED.length && totalXP >= EXPERIENCE_REQUIRED[level]) {
             totalXP -= EXPERIENCE_REQUIRED[level];
@@ -41,7 +41,7 @@ public class CatacombsField extends Field<Double> {
     }
 
     public double getOverflow() {
-        double totalSkillXP = 0;
+        Double totalSkillXP = 0d;
         for (int requiredXP : EXPERIENCE_REQUIRED) {
             totalSkillXP += requiredXP;
         }

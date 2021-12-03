@@ -1,7 +1,5 @@
 package profile.fields;
 
-import java.util.logging.Logger;
-
 public class SkillField extends Field<Double>{
 
     public static final int[] EXPERIENCE_REQUIRED = {
@@ -33,8 +31,7 @@ public class SkillField extends Field<Double>{
     }
 
     public double getLevel() {
-        System.out.println(value);
-        double totalXP = value;
+        Double totalXP = value;
         int level = 0;
         while (level < EXPERIENCE_REQUIRED.length && totalXP >= EXPERIENCE_REQUIRED[level]) {
             totalXP -= EXPERIENCE_REQUIRED[level];
@@ -47,7 +44,7 @@ public class SkillField extends Field<Double>{
     }
 
     public double getOverflow() {
-        double totalSkillXP = 0;
+        Double totalSkillXP = 0d;
         for (int requiredXP : EXPERIENCE_REQUIRED) {
             totalSkillXP += requiredXP;
         }
