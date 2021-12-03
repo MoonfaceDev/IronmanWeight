@@ -17,10 +17,15 @@ public class RequestParser implements IRequestParser {
     @Override
     public SkyblockProfile parseRequest(String request) throws DatabaseException, ParsingException {
         String[] words = request.split("\\s");
-        if(words.length == 3 && words[0].startsWith(REQUEST_COMMAND)) {
-            String playerName = words[1];
-            String profileName = words[2];
-            return database.getProfile(playerName, profileName);
+        if(words[0].equals(REQUEST_COMMAND)) {
+            if (words.length == 3) {
+                String playerName = words[1];
+                String profileName = words[2];
+                return database.getProfile(playerName, profileName);
+            } else if(words.length == 2) {
+                String playerName = words[1];
+                return database.getProfile(playerName);
+            }
         }
         throw new ParsingException("Could not parse the given request");
     }

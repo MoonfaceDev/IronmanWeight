@@ -22,7 +22,7 @@ public class RequestReceiver implements IRequestReceiver {
     @Override
     public void onNewRequest(MessageReceivedEvent event) {
         String request = event.getMessage().getContentRaw();
-        if(!isBotRequest(request)){
+        if (!isBotRequest(request)) {
             return;
         }
         String response;
@@ -39,11 +39,16 @@ public class RequestReceiver implements IRequestReceiver {
     }
 
     private boolean isBotRequest(String request) {
-        return request.startsWith(RequestParser.REQUEST_COMMAND+" ");
+        return request.startsWith(RequestParser.REQUEST_COMMAND + " ");
     }
 
     private String getErrorMessage(String playerName, String profileName, String errorMessage) {
-        return ":pick: "+playerName+" | "+profileName+""+
-                "\n**Error:** "+errorMessage;
+        if (profileName == null) {
+            return ":pick: " + playerName +
+                    "\n**Error:** " + errorMessage;
+        } else {
+            return ":pick: " + playerName + " | " + profileName + "" +
+                    "\n**Error:** " + errorMessage;
+        }
     }
 }

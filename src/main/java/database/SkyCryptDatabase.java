@@ -19,10 +19,16 @@ public class SkyCryptDatabase implements IDatabase {
     public static final String SKY_CRYPT_URL = "https://sky.shiiyu.moe/api/v2/profile/";
     private static final String ERROR_KEY = "error";
     private static final String PROFILE_NAME_KEY = "cute_name";
+    private static final String PROFILE_CURRENT_KEY = "current";
 
     public static String getAPIRaw(String playerName) throws IOException {
         HttpGetRequest request = new HttpGetRequest(SKY_CRYPT_URL+playerName);
         return request.get();
+    }
+
+    @Override
+    public SkyblockProfile getProfile(String playerName) throws DatabaseException {
+        return getProfile(playerName, null);
     }
 
     @Override
@@ -33,6 +39,9 @@ public class SkyCryptDatabase implements IDatabase {
             if(hasErrorKey(document)) {
                 throw new DatabaseException(playerName, profileName, "Couldn't find the player '"+playerName+"'");
             }
+            if(profileName == null) {
+                profileName = getCurrentProfileName(document);
+            }
             SkyblockProfile profile = getProfileFromDocument(document, playerName, profileName);
             if(profile == null) {
                 throw new DatabaseException(playerName, profileName, "Couldn't find the profile '"+profileName+"'");
@@ -41,6 +50,18 @@ public class SkyCryptDatabase implements IDatabase {
         } catch (IOException e) {
             throw new DatabaseException(playerName, profileName, "Could not retrieve API data");
         }
+    }
+
+    private String getCurrentProfileName(DocumentContext document) {
+        Map<String, Object> profileMap = document.read("$.profiles");
+        Set<String> keys = profileMap.keySet();
+        for(String key : keys) {
+            Map<String, Object> jsonProfile = document.read("$.profiles."+key);
+            if((boolean) jsonProfile.get(PROFILE_CURRENT_KEY)) {
+                return jsonProfile.get(PROFILE_NAME_KEY).toString();
+            }
+        }
+        return null;
     }
 
     private boolean hasErrorKey(DocumentContext document) {
@@ -87,11 +108,11 @@ public class SkyCryptDatabase implements IDatabase {
         return null;
     }
 
-    private String getProfileIDByName(DocumentContext jsonDocument, String profileName) {
-        Map<String, Object> profileMap = jsonDocument.read("$.profiles");
+    private String getProfileIDByName(DocumentContext document, String profileName) {
+        Map<String, Object> profileMap = document.read("$.profiles");
         Set<String> keys = profileMap.keySet();
         for(String key : keys) {
-            Map<String, Object> jsonProfile = jsonDocument.read("$.profiles."+key);
+            Map<String, Object> jsonProfile = document.read("$.profiles."+key);
             if(jsonProfile.get(PROFILE_NAME_KEY).toString().equalsIgnoreCase(profileName)) {
                 return key;
             }
