@@ -1,4 +1,3 @@
-import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 
@@ -15,8 +14,7 @@ public class Bot {
     }
 
     private String getDiscordToken() {
-        Dotenv dotenv = Dotenv.load();
-        return dotenv.get("DISCORD_TOKEN");
+        return System.getenv("DISCORD_TOKEN");
     }
 
     public void build() {
