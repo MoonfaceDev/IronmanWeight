@@ -30,7 +30,7 @@ public class SlayerField extends Field<Integer> {
             level++;
         }
         if(level == EXPERIENCE_REQUIRED.length) {
-            totalXP = 0;
+            return level;
         }
         return level+totalXP/EXPERIENCE_REQUIRED[level];
     }
