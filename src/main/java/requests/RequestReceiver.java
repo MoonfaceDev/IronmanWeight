@@ -22,6 +22,9 @@ public class RequestReceiver implements IRequestReceiver {
     @Override
     public void onNewRequest(MessageReceivedEvent event) {
         String request = event.getMessage().getContentRaw();
+        if(!request.startsWith("/ironweight ")){
+            return;
+        }
         String response;
         try {
             SkyblockProfile profile = requestParser.parseRequest(request);
