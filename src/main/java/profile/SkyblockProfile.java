@@ -1,6 +1,11 @@
+package profile;
+
 import fields.*;
 
 public class SkyblockProfile {
+
+    public String playerName;
+    public String profileName;
 
     //ADD NEW FIELD
     public CatacombsField catacombs = new CatacombsField("data.dungeons.catacombs.level.xp");

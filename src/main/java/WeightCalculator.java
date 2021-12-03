@@ -1,19 +1,24 @@
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Activity;
-
-import javax.security.auth.login.LoginException;
+import database.IDatabase;
+import database.SkyCryptDatabase;
+import requests.IRequestParser;
+import requests.IRequestReceiver;
+import requests.RequestParser;
+import requests.RequestReceiver;
+import responses.IResponseFormatter;
+import responses.IResponseSender;
+import responses.ResponseFormatter;
+import responses.ResponseSender;
 
 public class WeightCalculator {
 
     public static void main(String[] args) {
-        JDABuilder builder = JDABuilder.createDefault(Configuration.DISCORD_TOKEN);
-        builder.setActivity(Activity.playing("Skyblock"));
-        builder.addEventListeners(new BotListenerAdapter());
-        try {
-            builder.build();
-        } catch (LoginException e) {
-            e.printStackTrace();
-        }
+        IDatabase database = new SkyCryptDatabase();
+        IRequestParser requestParser = new RequestParser(database);
+        IResponseFormatter responseFormatter = new ResponseFormatter();
+        IResponseSender responseSender = new ResponseSender();
+        IRequestReceiver requestReceiver = new RequestReceiver(requestParser, responseFormatter, responseSender);
+        Bot bot = new Bot(new BotListenerAdapter(requestReceiver));
+        bot.build();
     }
 
 }

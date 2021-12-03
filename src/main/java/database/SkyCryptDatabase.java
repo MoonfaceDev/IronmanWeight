@@ -1,9 +1,13 @@
+package database;
+
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import fields.Field;
 import fields.ItemField;
 import fields.PetField;
 import net.minidev.json.JSONArray;
+import profile.SkyblockProfile;
+import utils.HttpGetRequest;
 
 import java.io.IOException;
 import java.util.Map;
@@ -23,18 +27,23 @@ public class SkyCryptDatabase implements IDatabase {
         try {
             String rawData = getAPIRaw(playerName);
             if(((Map<String, Object>)JsonPath.parse(rawData).read("@")).containsKey("error")) {
-                throw new DatabaseException("Couldn't find the player '"+playerName+"'");
+                throw new DatabaseException(playerName, profileName, "Couldn't find the player '"+playerName+"'");
             }
-            return getProfileFromMap(rawData, profileName);
+            return getProfileFromMap(rawData, playerName, profileName);
         } catch (IOException e) {
-            throw new DatabaseException("Could not retrieve API data");
+            throw new DatabaseException(playerName, profileName, "Could not retrieve API data");
         }
     }
 
-    private SkyblockProfile getProfileFromMap(String rawData, String profileName) throws DatabaseException {
+    private SkyblockProfile getProfileFromMap(String rawData, String playerName, String profileName) throws DatabaseException {
         DocumentContext document = JsonPath.parse(rawData);
         String profileID = getProfileIDByName(document, profileName);
+        if (profileID == null) {
+            throw new DatabaseException(playerName, profileName, "Couldn't find the profile '"+profileName+"'");
+        }
         SkyblockProfile skyblockProfile = new SkyblockProfile();
+        skyblockProfile.playerName = playerName;
+        skyblockProfile.profileName = profileName;
         for (Field<?> field : skyblockProfile.getFields()) {
             field.setValue(document.read("$.profiles." + profileID + "." + field.jsonPath));
         }
@@ -73,6 +82,6 @@ public class SkyCryptDatabase implements IDatabase {
                 return key;
             }
         }
-        throw new DatabaseException("Couldn't find the profile '"+profileName+"'");
+        return null;
     }
 }
