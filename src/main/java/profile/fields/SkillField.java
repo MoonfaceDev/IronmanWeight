@@ -1,5 +1,7 @@
 package profile.fields;
 
+import java.util.logging.Logger;
+
 public class SkillField extends Field<Double>{
 
     public static final int[] EXPERIENCE_REQUIRED = {
@@ -31,6 +33,7 @@ public class SkillField extends Field<Double>{
     }
 
     public double getLevel() {
+        Logger.getLogger(SkillField.class.getName()).info(value.toString());
         double totalXP = value;
         int level = 0;
         while (level < EXPERIENCE_REQUIRED.length && totalXP >= EXPERIENCE_REQUIRED[level]) {
