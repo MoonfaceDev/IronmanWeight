@@ -32,7 +32,7 @@ public class SlayerField extends Field<Integer> {
         if(level == EXPERIENCE_REQUIRED.length) {
             totalXP = 0;
         }
-        return level+totalXP/EXPERIENCE_REQUIRED[level-1];
+        return level+totalXP/EXPERIENCE_REQUIRED[level];
     }
 
     public double getOverflow() {
