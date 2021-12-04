@@ -8,7 +8,8 @@ import java.util.logging.Logger;
 public class BotListenerAdapter extends ListenerAdapter {
 
     private final IRequestReceiver requestReceiver;
-    static Logger logger = Logger.getLogger(BotListenerAdapter.class.getName());
+
+    private static final Logger logger = Logger.getLogger(BotListenerAdapter.class.getName());
 
     public BotListenerAdapter(IRequestReceiver requestReceiver) {
         this.requestReceiver = requestReceiver;

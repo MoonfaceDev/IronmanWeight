@@ -8,6 +8,7 @@ import profile.SkyblockProfile;
 import profile.fields.Field;
 import profile.fields.ItemField;
 import profile.fields.PetField;
+import profile.fields.TalismanField;
 import utils.HttpGetRequest;
 
 import java.io.IOException;
@@ -22,6 +23,8 @@ public class SkyCryptDatabase implements IDatabase {
     private static final String ERROR_KEY = "error";
     private static final String PROFILE_NAME_KEY = "cute_name";
     private static final String PROFILE_CURRENT_KEY = "current";
+
+    private static final Logger logger = Logger.getLogger(SkyCryptDatabase.class.getName());
 
     public static String getAPIRaw(String playerName) throws IOException {
         HttpGetRequest request = new HttpGetRequest(SKY_CRYPT_URL + playerName);
@@ -84,7 +87,7 @@ public class SkyCryptDatabase implements IDatabase {
             try {
                 field.setValue(document.read("$.profiles." + profileID + "." + field.jsonPath));
             } catch (PathNotFoundException e) {
-                Logger.getLogger(SkyCryptDatabase.class.getName()).info(e.getMessage());
+                logger.info(e.getMessage());
             }
         }
         for (ItemField itemField : skyblockProfile.getItemFields()) {
@@ -92,6 +95,9 @@ public class SkyCryptDatabase implements IDatabase {
         }
         for (PetField petField : skyblockProfile.getPetFields()) {
             petField.setValue(getPet(document, profileID, petField.jsonPath, petField.petID));
+        }
+        for(TalismanField talismanField : skyblockProfile.getTalismanFields()) {
+            talismanField.setValue(getTalisman(document, profileID, talismanField.jsonPath, talismanField.talismanID));
         }
         return skyblockProfile;
     }
@@ -109,6 +115,15 @@ public class SkyCryptDatabase implements IDatabase {
     private Map<String, Object> getPet(DocumentContext document, String profileID, String jsonPath, String petID) {
         List<Map<String, Object>> matchingArray =
                 document.read("$.profiles." + profileID + "." + jsonPath + "[*][?(@.type == \"" + petID + "\")]");
+        if (matchingArray.size() > 0) {
+            return matchingArray.get(0);
+        }
+        return null;
+    }
+
+    private Map<String, Object> getTalisman(DocumentContext document, String profileID, String jsonPath, String talismanID) {
+        List<Map<String, Object>> matchingArray =
+                document.read("$.profiles." + profileID + "." + jsonPath + "[*][?(@.tag.ExtraAttributes.id == \"" + talismanID + "\")]");
         if (matchingArray.size() > 0) {
             return matchingArray.get(0);
         }

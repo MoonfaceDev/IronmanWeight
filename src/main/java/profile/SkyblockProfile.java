@@ -13,8 +13,7 @@ public class SkyblockProfile {
     public GemstonePowderField gemstonePowder = new GemstonePowderField("data.mining.core.powder.gemstone.total");
     public MithrilPowderField mithrilPowder = new MithrilPowderField("data.mining.core.powder.mithril.total");
     public MinionSlotsField minionSlots = new MinionSlotsField("data.minion_slots.currentSlots");
-    public MissingTalismansField missingTalismans = new MissingTalismansField("data.missingTalismans.missing");
-    public MissingTalismanUpgradesField missingTalismanUpgrades = new MissingTalismanUpgradesField("data.missingTalismans.upgrades");
+    public NormalTalismansField normalTalismans = new NormalTalismansField("data.talismans");
     public PetScoreField petScore = new PetScoreField("data.petScore");
     public SkillField taming = new SkillField("data.levels.taming.xp", 2);
     public SkillField farming = new SkillField("data.levels.farming.xp", 9);
@@ -52,6 +51,11 @@ public class SkyblockProfile {
             new PetField("data.pets", "SQUID", new double[]{0,0,0,0,10,0}),
             new PetField("data.pets", "WOLF", new double[]{0,0,0,0,5,0}),
             new PetField("data.pets", "WITHER_SKELETON", new double[]{0,0,0,0,5,0}),
+    };
+
+    //ADD NEW TALISMAN FIELD
+    public TalismanField[] talismans = {
+            new TalismanField("data.talismans", "MY_TALISMAN_ID", new double[]{0,0,0,0,0,0}),
     };
 
     //ADD NEW ITEM FIELD
@@ -184,8 +188,8 @@ public class SkyblockProfile {
 
     //ADD NEW FIELD
     public Field<?>[] getFields() {
-        return new Field[]{catacombs, gemstonePowder, mithrilPowder, minionSlots, missingTalismans,
-                missingTalismanUpgrades, petScore, taming, farming, mining, combat, foraging, fishing, enchanting,
+        return new Field[]{catacombs, gemstonePowder, mithrilPowder, minionSlots, normalTalismans,
+                petScore, taming, farming, mining, combat, foraging, fishing, enchanting,
                 alchemy, zombie, spider, wolf, enderman};
     }
 
@@ -197,6 +201,18 @@ public class SkyblockProfile {
         double total = 0;
         for(PetField petField : getPetFields()) {
             total += petField.getWeight();
+        }
+        return total;
+    }
+
+    public TalismanField[] getTalismanFields() {
+        return talismans;
+    }
+
+    public double getTalismansWeight() {
+        double total = 0;
+        for(TalismanField talismanField : getTalismanFields()) {
+            total += talismanField.getWeight();
         }
         return total;
     }
@@ -238,6 +254,7 @@ public class SkyblockProfile {
         }
         total += getItemsWeight();
         total += getPetsWeight();
+        total += getTalismansWeight();
         return total;
     }
 
