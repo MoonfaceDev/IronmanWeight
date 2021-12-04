@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 public class SkyCryptDatabase implements IDatabase {
 
@@ -82,8 +83,8 @@ public class SkyCryptDatabase implements IDatabase {
         for (Field<?> field : skyblockProfile.getFields()) {
             try {
                 field.setValue(document.read("$.profiles." + profileID + "." + field.jsonPath));
-            } catch (PathNotFoundException ignored) {
-
+            } catch (PathNotFoundException e) {
+                Logger.getLogger(SkyCryptDatabase.class.getName()).info(e.getMessage());
             }
         }
         for (ItemField itemField : skyblockProfile.getItemFields()) {
