@@ -13,7 +13,7 @@ public class SkyblockProfile {
     public GemstonePowderField gemstonePowder = new GemstonePowderField("data.mining.core.powder.gemstone.total");
     public MithrilPowderField mithrilPowder = new MithrilPowderField("data.mining.core.powder.mithril.total");
     public MinionSlotsField minionSlots = new MinionSlotsField("data.minion_slots.currentSlots");
-    public NormalTalismansField normalTalismans = new NormalTalismansField("data.talismans");
+    public NormalTalismansField normalTalismans = new NormalTalismansField("items.talismans");
     public PetScoreField petScore = new PetScoreField("data.petScore");
     public SkillField taming = new SkillField("data.levels.taming.xp", 2);
     public SkillField farming = new SkillField("data.levels.farming.xp", 9);
@@ -55,7 +55,7 @@ public class SkyblockProfile {
 
     //ADD NEW TALISMAN FIELD
     public TalismanField[] talismans = {
-            new TalismanField("data.talismans", "MY_TALISMAN_ID", new double[]{0,0,0,0,0,0}),
+            new TalismanField("items.talismans", "MY_TALISMAN_ID", new double[]{0,0,0,0,0,0}),
     };
 
     //ADD NEW ITEM FIELD
