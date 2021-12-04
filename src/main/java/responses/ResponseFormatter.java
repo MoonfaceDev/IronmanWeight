@@ -29,7 +29,7 @@ public class ResponseFormatter implements IResponseFormatter {
                 "\n - Wolf: " + weightFormat.format(profile.wolf.getWeight()) +
                 "\n - Enderman: " + weightFormat.format(profile.enderman.getWeight()) +
                 "\n**Items:** " + weightFormat.format(profile.getItemsWeight() + profile.getPetsWeight()) +
-                "\n**Talismans:** " + weightFormat.format(profile.normalTalismans.getWeight() + profile.getTalismansWeight()) +
+                "\n**Talismans:** " + weightFormat.format(profile.talismans.getWeight()) +
                 "\n**Mithril Powder:** " + weightFormat.format(profile.mithrilPowder.getWeight()) +
                 "\n**Gemstone Powder:** " + weightFormat.format(profile.gemstonePowder.getWeight()) +
                 "\n**Pet Score:** " + weightFormat.format(profile.petScore.getWeight()) +

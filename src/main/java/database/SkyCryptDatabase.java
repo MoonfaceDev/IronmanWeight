@@ -8,7 +8,6 @@ import profile.SkyblockProfile;
 import profile.fields.Field;
 import profile.fields.ItemField;
 import profile.fields.PetField;
-import profile.fields.TalismanField;
 import utils.HttpGetRequest;
 
 import java.io.IOException;
@@ -95,9 +94,6 @@ public class SkyCryptDatabase implements IDatabase {
         }
         for (PetField petField : skyblockProfile.getPetFields()) {
             petField.setValue(getPet(document, profileID, petField.jsonPath, petField.petID));
-        }
-        for(TalismanField talismanField : skyblockProfile.getTalismanFields()) {
-            talismanField.setValue(getTalisman(document, profileID, talismanField.jsonPath, talismanField.talismanID));
         }
         return skyblockProfile;
     }

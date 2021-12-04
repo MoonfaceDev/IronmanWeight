@@ -13,7 +13,7 @@ public class SkyblockProfile {
     public GemstonePowderField gemstonePowder = new GemstonePowderField("data.mining.core.powder.gemstone.total");
     public MithrilPowderField mithrilPowder = new MithrilPowderField("data.mining.core.powder.mithril.total");
     public MinionSlotsField minionSlots = new MinionSlotsField("data.minion_slots.currentSlots");
-    public NormalTalismansField normalTalismans = new NormalTalismansField("items.talismans");
+    public TalismansField talismans = new TalismansField("items.talismans");
     public PetScoreField petScore = new PetScoreField("data.petScore");
     public SkillField taming = new SkillField("data.levels.taming.xp", 2);
     public SkillField farming = new SkillField("data.levels.farming.xp", 9);
@@ -51,11 +51,6 @@ public class SkyblockProfile {
             new PetField("data.pets", "SQUID", new double[]{0,0,0,0,10,0}),
             new PetField("data.pets", "WOLF", new double[]{0,0,0,0,5,0}),
             new PetField("data.pets", "WITHER_SKELETON", new double[]{0,0,0,0,5,0}),
-    };
-
-    //ADD NEW TALISMAN FIELD
-    public TalismanField[] talismans = {
-            new TalismanField("items.talismans", "MY_TALISMAN_ID", new double[]{0,0,0,0,0,0}),
     };
 
     //ADD NEW ITEM FIELD
@@ -184,11 +179,12 @@ public class SkyblockProfile {
             new ItemField(new String[]{"items.wardrobe_inventory", "items.armor", "items.inventory", "items.enderchest", "items.personal_vault", "items.storage"}, "NECROMANCER_LORD_BOOTS", 2),
             new ItemField("items.weapons", "WITHER_CLOAK", 5),
             new ItemField("items.rods", "ROD_OF_LEGENDS", 3),
+            new ItemField("items.talismans", "MY_TALISMAN_ID", 0),
     };
 
     //ADD NEW FIELD
     public Field<?>[] getFields() {
-        return new Field[]{catacombs, gemstonePowder, mithrilPowder, minionSlots, normalTalismans,
+        return new Field[]{catacombs, gemstonePowder, mithrilPowder, minionSlots, talismans,
                 petScore, taming, farming, mining, combat, foraging, fishing, enchanting,
                 alchemy, zombie, spider, wolf, enderman};
     }
@@ -201,18 +197,6 @@ public class SkyblockProfile {
         double total = 0;
         for(PetField petField : getPetFields()) {
             total += petField.getWeight();
-        }
-        return total;
-    }
-
-    public TalismanField[] getTalismanFields() {
-        return talismans;
-    }
-
-    public double getTalismansWeight() {
-        double total = 0;
-        for(TalismanField talismanField : getTalismanFields()) {
-            total += talismanField.getWeight();
         }
         return total;
     }
@@ -254,7 +238,6 @@ public class SkyblockProfile {
         }
         total += getItemsWeight();
         total += getPetsWeight();
-        total += getTalismansWeight();
         return total;
     }
 
