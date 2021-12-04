@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class MissingTalismanUpgradesField extends Field<List<Map<String, String>>>{
+public class MissingTalismanUpgradesField extends Field<List<Map<String, Object>>>{
     public MissingTalismanUpgradesField(String jsonPath) {
         super(jsonPath);
         this.value = new ArrayList<>();
