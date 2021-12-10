@@ -117,15 +117,6 @@ public class SkyCryptDatabase implements IDatabase {
         return null;
     }
 
-    private Map<String, Object> getTalisman(DocumentContext document, String profileID, String jsonPath, String talismanID) {
-        List<Map<String, Object>> matchingArray =
-                document.read("$.profiles." + profileID + "." + jsonPath + "[*][?(@.tag.ExtraAttributes.id == \"" + talismanID + "\")]");
-        if (matchingArray.size() > 0) {
-            return matchingArray.get(0);
-        }
-        return null;
-    }
-
     private String getProfileIDByName(DocumentContext document, String profileName) {
         Map<String, Object> profileMap = document.read("$.profiles");
         Set<String> keys = profileMap.keySet();
