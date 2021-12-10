@@ -36,6 +36,7 @@ public class TalismansField extends Field<List<Map<String, Object>>>{
     }
 
     public boolean isRecombobulated(Map<String, Object> talisman) {
+        System.out.println(((Map<String, Object>)(talisman.get("extra"))).get("recombobulated"));
         return (boolean) ((Map<String, Object>)(talisman.get("extra"))).get("recombobulated");
     }
 }
