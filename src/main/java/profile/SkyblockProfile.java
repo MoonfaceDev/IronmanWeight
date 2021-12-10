@@ -32,7 +32,7 @@ public class SkyblockProfile {
     public PetField[] pets = {
             new PetField("data.pets", "SCATHA", new double[]{0,0,30,35,40,0}),
             new PetField("data.pets", "BAL", new double[]{0,0,0,10,15,0}),
-            new PetField("data.pets", "PHOENIX", new double[]{0,0,0,1,2,0}),
+            new PetField("data.pets", "PHOENIX", new double[]{0,0,0,15,20,0}),
             new PetField("data.pets", "GOLDEN_DRAGON", new double[]{0,0,0,0,35,0}),
             new PetField("data.pets", "ENDER_DRAGON", new double[]{0,0,0,40,45,0}),
             new PetField("data.pets", "SNOWMAN", new double[]{0,0,0,0,5,0}),
