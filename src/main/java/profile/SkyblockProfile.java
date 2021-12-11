@@ -23,10 +23,10 @@ public class SkyblockProfile {
     public SkillField fishing = new SkillField("data.levels.fishing.xp", 11);
     public SkillField enchanting = new SkillField("data.levels.enchanting.xp", 2);
     public SkillField alchemy = new SkillField("data.levels.alchemy.xp", 3);
-    public SlayerField zombie = new SlayerField("data.slayers.zombie.level.xp", 12);
-    public SlayerField spider = new SlayerField("data.slayers.spider.level.xp", 16);
-    public SlayerField wolf = new SlayerField("data.slayers.wolf.level.xp", 20);
-    public SlayerField enderman = new SlayerField("data.slayers.enderman.level.xp", 40);
+    public SlayerField zombie = new SlayerField("data.slayers.zombie.level.xp", 10, 1);
+    public SlayerField spider = new SlayerField("data.slayers.spider.level.xp", 11.1, 2.6);
+    public SlayerField wolf = new SlayerField("data.slayers.wolf.level.xp", 13.2, 3.1);
+    public SlayerField enderman = new SlayerField("data.slayers.enderman.level.xp", 16.9, 2);
 
     //ADD NEW PET FIELD
     public PetField[] pets = {

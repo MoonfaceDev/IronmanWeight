@@ -11,9 +11,9 @@ public class SkillField extends Field<Number>{
             4300000, 4600000, 4900000, 5200000, 5500000, 5800000, 6100000, 6400000, 6700000, 7000000
     };
 
-    public int max;
+    public double max;
 
-    public SkillField(String jsonPath, int max) {
+    public SkillField(String jsonPath, double max) {
         super(jsonPath);
         this.max = max;
         this.value = 0d;
@@ -21,13 +21,8 @@ public class SkillField extends Field<Number>{
 
     @Override
     public double getWeight() {
-        double weight = 0d;
-        for (int i=1;i<=getLevel()-1;i++) {
-            weight += max * (1d - (Math.abs(i - 50d)) / (50d));
-        }
-        weight += max * (1d - (Math.abs(getLevel() - 50d)) / (50d));
-        weight=weight+((20d*max)/(1+Math.exp(-0.1*(getOverflow()/1000000d))))-max*10d;
-        return weight;
+        return 1.5*getLevel()*(Math.exp((0.005d+0.0021d*max)*getLevel())-1)
+                +((20d*max)/(1+Math.exp(-0.1*(getOverflow()/1000000d))))-max*10d;
     }
 
     public double getLevel() {

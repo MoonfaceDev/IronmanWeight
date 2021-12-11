@@ -17,14 +17,7 @@ public class CatacombsField extends Field<Number> {
 
     @Override
     public double getWeight() {
-        double weight = 0d;
-        double max = 40;
-        for(int i=1; i<=getLevel()-1; i++) {
-            weight += max*(1d-Math.abs(i-50d)/50d);
-        }
-        weight += max*(1d-Math.abs(getLevel()-50d)/50d);
-        weight += 4d*max/(1d+Math.exp(-0.0008d*getOverflow()/1000000d))-2d*max;
-        return weight;
+        return 22*Math.exp(0.085d*getLevel())-22;
     }
 
     public double getLevel() {

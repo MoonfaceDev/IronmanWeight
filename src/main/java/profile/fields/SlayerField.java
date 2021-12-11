@@ -4,22 +4,20 @@ public class SlayerField extends Field<Integer> {
 
     public static final int[] EXPERIENCE_REQUIRED = {10, 30, 250, 1500, 5000, 20000, 100000, 400000, 1000000};
 
-    public int max;
+    public double max;
+    public double overflowMax;
 
-    public SlayerField(String jsonPath, int max) {
+    public SlayerField(String jsonPath, double max, double overflowMax) {
         super(jsonPath);
         this.max = max;
+        this.overflowMax = overflowMax;
         this.value = 0;
     }
 
     @Override
     public double getWeight() {
-        double weight = 0d;
-        for(int i=1; i<=getLevel(); i++) {
-            weight += max*(1d-Math.abs(getLevel()-9d)/9d);
-        }
-        weight += 10d/3d*max/(1d+Math.exp(-0.15d*getOverflow()/1000000d))-5d/3d*max;
-        return weight;
+        return 1.5d*getLevel()*(Math.exp((0.02d+0.0195d*max)*getLevel())-1)
+                +24d/overflowMax*max/(1+Math.exp(-0.8d*overflowMax*getOverflow()/1000000d))-12d/overflowMax*max;
     }
 
     public double getLevel() {
