@@ -17,7 +17,8 @@ public class CatacombsField extends Field<Number> {
 
     @Override
     public double getWeight() {
-        return 22*Math.exp(0.085d*getLevel())-22;
+        return 22*Math.exp(0.085d*getLevel())-22
+                +600d/(1+5*Math.exp(-0.007d*getOverflow()/1000000d))-100d;
     }
 
     public double getLevel() {
