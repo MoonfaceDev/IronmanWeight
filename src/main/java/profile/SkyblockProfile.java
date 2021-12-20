@@ -202,10 +202,21 @@ public class SkyblockProfile {
             new ItemField(new String[]{"items.wardrobe_inventory", "items.armor", "items.inventory", "items.enderchest", "items.personal_vault", "items.storage"}, "MASTIFF_CHESTPLATE", 1),
             new ItemField(new String[]{"items.wardrobe_inventory", "items.armor", "items.inventory", "items.enderchest", "items.personal_vault", "items.storage"}, "MASTIFF_LEGGINGS", 1),
             new ItemField(new String[]{"items.wardrobe_inventory", "items.armor", "items.inventory", "items.enderchest", "items.personal_vault", "items.storage"}, "MASTIFF_BOOTS", 1),
-            new ItemField("items.talismans", "MASTER_SKULL_TIER_7", 5),
-            new ItemField("items.talismans", "HEGEMONY_ARTIFACT", 5),
-    };
+            new ItemField(new String[]{"items.wardrobe_inventory", "items.armor", "items.inventory", "items.enderchest", "items.personal_vault", "items.storage"}, "DCTR_SPACE_HELM", 1),
+            new ItemField("items.talismans", "MASTER_SKULL_TIER_7", 4),
+            new ItemField("items.talismans", "JERRY_TALISMAN_GOLDEN", 3),
+            new ItemField("items.talismans", "HEGEMONY_ARTIFACT", 3),
+            new ItemField("items.talismans", "PERSONAL_COMPACTOR_7000", 1),
+            new ItemField("items.talismans", "CATACOMBS_EXPERT_RING", 2),
+            new ItemField("items.talismans", "AUTO_RECOMBOBULATOR", 2),
+            new ItemField("items.talismans", "TREASURE_ARTIFACT", 3),
+            new ItemField("items.talismans", "SEAL_OF_THE_FAMILY", 3),
+            new ItemField("items.talismans", "ENDER_RELIC", 3),
+            new ItemField("items.talismans", "HUNTER_RING", 2),
+            new ItemField("items.talismans", "SOULFLOW_SUPERCELL", 2),
+            new ItemField("items.talismans", "SPIKED_ATROCITY", 1),
 
+    };
     //ADD NEW FIELD
     public Field<?>[] getFields() {
         return new Field[]{catacombs, gemstonePowder, mithrilPowder, minionSlots, talismans,
