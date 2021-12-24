@@ -16,7 +16,7 @@ public class SkyblockProfile {
     public TalismansField talismans = new TalismansField("items.talismans");
     public PetScoreField petScore = new PetScoreField("data.petScore");
     public SkillField taming = new SkillField("data.levels.taming.xp", 2);
-    public SkillField farming = new SkillField("data.levels.farming.xp", 9);
+    public SkillField farming = new FarmingSkillField("data.levels.farming.xp", 9);
     public SkillField mining = new SkillField("data.levels.mining.xp", 9);
     public SkillField combat = new SkillField("data.levels.combat.xp", 10);
     public SkillField foraging = new SkillField("data.levels.foraging.xp", 8);

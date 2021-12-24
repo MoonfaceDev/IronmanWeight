@@ -1,7 +1,7 @@
 package responses;
 
-import net.dv8tion.jda.api.entities.MessageChannel;
+import requests.IRequest;
 
 public interface IResponseSender {
-    void sendResponse(MessageChannel channel, String response);
+    void sendResponse(String response, IRequest request);
 }

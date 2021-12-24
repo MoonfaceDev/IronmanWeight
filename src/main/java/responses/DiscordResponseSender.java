@@ -1,19 +1,23 @@
 package responses;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageChannel;
+import requests.DiscordRequest;
+import requests.IRequest;
 
 import java.awt.*;
 import java.time.Instant;
 
-public class ResponseSender implements IResponseSender {
+public class DiscordResponseSender implements IResponseSender {
 
     private static final Color messageColor = Color.decode("#304ffe");
     private static final String messageFooter = "Ironman Weight • Created By nomface";
 
     @Override
-    public void sendResponse(MessageChannel channel, String response) {
-        channel.sendMessageEmbeds(new EmbedBuilder()
+    public void sendResponse(String response, IRequest request) {
+        if(!(request instanceof DiscordRequest)) {
+            return;
+        }
+        ((DiscordRequest) request).getChannel().sendMessageEmbeds(new EmbedBuilder()
                 .setDescription(response)
                 .setColor(messageColor)
                 .setFooter(messageFooter)

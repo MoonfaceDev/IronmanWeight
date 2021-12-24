@@ -1,8 +1,6 @@
 package requests;
 
 import database.DatabaseException;
-import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import profile.SkyblockProfile;
 import responses.IResponseFormatter;
 import responses.IResponseSender;
@@ -20,22 +18,21 @@ public class RequestReceiver implements IRequestReceiver {
     }
 
     @Override
-    public void onNewRequest(MessageReceivedEvent event) {
-        String request = event.getMessage().getContentRaw();
-        if (!isBotRequest(request)) {
+    public void onNewRequest(IRequest request) {
+        String requestContent = request.getContent();
+        if (!isBotRequest(requestContent)) {
             return;
         }
         String response;
         try {
-            SkyblockProfile profile = requestParser.parseRequest(request);
+            SkyblockProfile profile = requestParser.parseRequest(requestContent);
             response = responseFormatter.format(profile);
         } catch (DatabaseException e) {
             response = getErrorMessage(e.playerName, e.profileName, e.getMessage());
         } catch (ParsingException e) {
             response = e.getMessage();
         }
-        MessageChannel channel = event.getChannel();
-        this.responseSender.sendResponse(channel, response);
+        this.responseSender.sendResponse(response, request);
     }
 
     private boolean isBotRequest(String request) {
