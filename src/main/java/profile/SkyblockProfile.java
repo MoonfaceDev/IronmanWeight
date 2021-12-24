@@ -19,7 +19,7 @@ public class SkyblockProfile {
     public SkillField farming = new FarmingSkillField("data.levels.farming.xp", 9);
     public SkillField mining = new SkillField("data.levels.mining.xp", 9);
     public SkillField combat = new SkillField("data.levels.combat.xp", 10);
-    public SkillField foraging = new SkillField("data.levels.foraging.xp", 8);
+    public SkillField foraging = new SkillField("data.levels.foraging.xp", 9);
     public SkillField fishing = new SkillField("data.levels.fishing.xp", 11);
     public SkillField enchanting = new SkillField("data.levels.enchanting.xp", 2);
     public SkillField alchemy = new SkillField("data.levels.alchemy.xp", 3);
