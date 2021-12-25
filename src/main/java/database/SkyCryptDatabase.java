@@ -3,7 +3,6 @@ package database;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
-import net.minidev.json.JSONArray;
 import profile.SkyblockProfile;
 import profile.fields.Field;
 import profile.fields.ItemField;
@@ -101,7 +100,7 @@ public class SkyCryptDatabase implements IDatabase {
 
     private boolean hasItem(DocumentContext document, String profileID, String[] jsonPaths, String itemID) {
         for (String jsonPath : jsonPaths) {
-            if (document.read("$.profiles." + profileID + "." + jsonPath + "[*][?(@.tag.ExtraAttributes.id == \"" + itemID + "\")]", JSONArray.class).size() > 0) {
+            if (document.read("$.profiles." + profileID + "." + jsonPath + "[*][?(@.tag.ExtraAttributes.id == \"" + itemID + "\")]", List.class).size() > 0) {
                 return true;
             }
         }

@@ -17,6 +17,7 @@ public class DiscordResponseSender implements IResponseSender {
         if(!(request instanceof DiscordRequest)) {
             return;
         }
+        ((DiscordRequest) request).getChannel().getName();
         ((DiscordRequest) request).getChannel().sendMessageEmbeds(new EmbedBuilder()
                 .setDescription(response)
                 .setColor(messageColor)
