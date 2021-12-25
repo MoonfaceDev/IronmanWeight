@@ -36,8 +36,13 @@ public class RequestReceiver implements IRequestReceiver {
                 logData.put("player", profile.playerName);
                 logData.put("profile", profile.profileName);
                 logData.put("author", ((DiscordRequest) request).getMessage().getAuthor().getAsTag());
-                logData.put("guild", ((DiscordRequest) request).getMessage().getGuild().getName());
-                logData.put("channel", ((DiscordRequest) request).getChannel().getName());
+                if(((DiscordRequest) request).getMessage().isFromGuild()) {
+                    logData.put("guild", ((DiscordRequest) request).getMessage().getGuild().getName());
+                    logData.put("channel", ((DiscordRequest) request).getChannel().getName());
+                } else {
+                    logData.put("guild", null);
+                    logData.put("channel", null);
+                }
                 responseLogger.log(logData.toJSONString());
             }
             response = responseFormatter.format(profile);
