@@ -1,5 +1,5 @@
 import database.SkyCryptDatabase;
-import logging.FileRequestLogger;
+import logging.FirebaseRequestLogger;
 import requests.RequestParser;
 import requests.RequestReceiver;
 import responses.ConsoleResponseSender;
@@ -7,20 +7,20 @@ import responses.ResponseFormatter;
 import responses.DiscordResponseSender;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class WeightCalculator {
 
     public static final String RUN_MODE = "run";
     public static final String TEST_MODE = "test";
-    public static final String LOG_FILE_PATH = "log.txt";
 
     public static void main(String[] args) {
         SkyCryptDatabase database = new SkyCryptDatabase();
         RequestParser requestParser = new RequestParser(database);
-        FileRequestLogger requestLogger = null;
+        FirebaseRequestLogger requestLogger = null;
         try {
-            requestLogger = new FileRequestLogger(LOG_FILE_PATH);
-        } catch (FileNotFoundException e) {
+            requestLogger = new FirebaseRequestLogger();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         ResponseFormatter responseFormatter = new ResponseFormatter();
