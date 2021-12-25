@@ -6,8 +6,8 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class FirebaseRequestLogger implements IRequestLogger {
 
