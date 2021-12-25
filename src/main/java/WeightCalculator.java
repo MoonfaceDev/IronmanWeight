@@ -12,7 +12,7 @@ public class WeightCalculator {
 
     public static final String RUN_MODE = "run";
     public static final String TEST_MODE = "test";
-    public static final String LOG_FILE_PATH = "log.txt";
+    public static final String LOG_FILE_PATH = "~/log.txt";
 
     public static void main(String[] args) {
         SkyCryptDatabase database = new SkyCryptDatabase();
