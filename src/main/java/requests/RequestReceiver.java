@@ -34,7 +34,7 @@ public class RequestReceiver implements IRequestReceiver {
             SkyblockProfile profile = requestParser.parseRequest(requestContent);
             if(request instanceof DiscordRequest) {
                 Map<String, Object> logData = new HashMap<>();
-                logData.put("timestamp", ((DiscordRequest) request).getMessage().getTimeCreated().toString());
+                logData.put("timestamp", ((DiscordRequest) request).getMessage().getTimeCreated());
                 logData.put("player", profile.playerName);
                 logData.put("profile", profile.profileName);
                 logData.put("author", ((DiscordRequest) request).getMessage().getAuthor().getAsTag());
