@@ -2,10 +2,12 @@ package requests;
 
 import database.DatabaseException;
 import logging.IRequestLogger;
-import net.minidev.json.JSONObject;
 import profile.SkyblockProfile;
 import responses.IResponseFormatter;
 import responses.IResponseSender;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RequestReceiver implements IRequestReceiver {
 
@@ -31,7 +33,7 @@ public class RequestReceiver implements IRequestReceiver {
         try {
             SkyblockProfile profile = requestParser.parseRequest(requestContent);
             if(request instanceof DiscordRequest) {
-                JSONObject logData = new JSONObject();
+                Map<String, Object> logData = new HashMap<>();
                 logData.put("timestamp", ((DiscordRequest) request).getMessage().getTimeCreated().toString());
                 logData.put("player", profile.playerName);
                 logData.put("profile", profile.profileName);
@@ -44,7 +46,7 @@ public class RequestReceiver implements IRequestReceiver {
                     logData.put("guild", null);
                     logData.put("channel", null);
                 }
-                responseLogger.log(logData.toJSONString());
+                responseLogger.log(logData);
             }
             response = responseFormatter.format(profile);
         } catch (DatabaseException e) {

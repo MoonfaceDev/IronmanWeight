@@ -8,6 +8,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Map;
 
 public class FirebaseRequestLogger implements IRequestLogger {
 
@@ -28,7 +29,7 @@ public class FirebaseRequestLogger implements IRequestLogger {
     }
 
     @Override
-    public void log(String data) {
+    public void log(Map<String, Object> data) {
         this.logsReference.push().setValueAsync(data);
     }
 }
