@@ -1,19 +1,24 @@
 package requests;
 
-import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
 public class DiscordRequest implements IRequest {
 
     private final MessageChannel channel;
-    private final Message message;
     private final String content;
+    private final User author;
+    private final boolean isFromGuild;
+    private final Guild guild;
 
-    public DiscordRequest(MessageReceivedEvent event) {
+    public DiscordRequest(SlashCommandEvent event) {
         this.channel = event.getChannel();
-        this.message = event.getMessage();
-        this.content = event.getMessage().getContentRaw();
+        this.content = event.getCommandString();
+        this.author = event.getUser();
+        this.isFromGuild = event.isFromGuild();
+        this.guild = event.getGuild();
     }
 
     @Override
@@ -25,7 +30,15 @@ public class DiscordRequest implements IRequest {
         return this.channel;
     }
 
-    public Message getMessage() {
-        return this.message;
+    public User getAuthor() {
+        return this.author;
+    }
+
+    public boolean isFromGuild() {
+        return isFromGuild;
+    }
+
+    public Guild getGuild() {
+        return this.guild;
     }
 }

@@ -38,10 +38,10 @@ public class RequestReceiver implements IRequestReceiver {
                 logData.put("timestamp", ServerValue.TIMESTAMP);
                 logData.put("player", profile.playerName);
                 logData.put("profile", profile.profileName);
-                logData.put("author", ((DiscordRequest) request).getMessage().getAuthor().getAsTag());
+                logData.put("author", ((DiscordRequest) request).getAuthor().getAsTag());
                 logData.put("weight", profile.getTotalWeight());
-                if(((DiscordRequest) request).getMessage().isFromGuild()) {
-                    logData.put("guild", ((DiscordRequest) request).getMessage().getGuild().getName());
+                if(((DiscordRequest) request).isFromGuild()) {
+                    logData.put("guild", ((DiscordRequest) request).getGuild().getName());
                     logData.put("channel", ((DiscordRequest) request).getChannel().getName());
                 } else {
                     logData.put("guild", null);

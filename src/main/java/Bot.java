@@ -1,3 +1,4 @@
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 
@@ -21,7 +22,8 @@ public class Bot {
 
     public void build() {
         try {
-            builder.build();
+            JDA jda = builder.build();
+            jda.upsertCommand("ironweight", "Calculate the IronWeight of a skyblock profile");
         } catch (LoginException e) {
             e.printStackTrace();
         }

@@ -3,10 +3,9 @@ import logging.FirebaseRequestLogger;
 import requests.RequestParser;
 import requests.RequestReceiver;
 import responses.ConsoleResponseSender;
-import responses.ResponseFormatter;
 import responses.DiscordResponseSender;
+import responses.ResponseFormatter;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class WeightCalculator {
