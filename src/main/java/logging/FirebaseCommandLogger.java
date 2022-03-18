@@ -16,7 +16,7 @@ public class FirebaseCommandLogger implements ICommandLogger {
 
     public FirebaseCommandLogger() throws IOException {
         FileInputStream serviceAccount =
-                new FileInputStream("serviceAccountKey.json");
+                new FileInputStream("google-credentials.json");
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
