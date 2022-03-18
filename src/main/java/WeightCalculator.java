@@ -1,6 +1,5 @@
 import database.SkyCryptDatabase;
 import logging.FirebaseRequestLogger;
-import requests.RequestParser;
 import requests.RequestReceiver;
 import responses.ConsoleResponseSender;
 import responses.DiscordResponseSender;
@@ -15,7 +14,6 @@ public class WeightCalculator {
 
     public static void main(String[] args) {
         SkyCryptDatabase database = new SkyCryptDatabase();
-        RequestParser requestParser = new RequestParser(database);
         FirebaseRequestLogger requestLogger = null;
         try {
             requestLogger = new FirebaseRequestLogger();
@@ -26,12 +24,12 @@ public class WeightCalculator {
         String mode = args[0];
         if(mode.equals(RUN_MODE)) {
             DiscordResponseSender responseSender = new DiscordResponseSender();
-            RequestReceiver requestReceiver = new RequestReceiver(requestParser, responseFormatter, responseSender, requestLogger);
+            RequestReceiver requestReceiver = new RequestReceiver(database, responseFormatter, responseSender, requestLogger);
             Bot bot = new Bot(new BotListenerAdapter(requestReceiver));
             bot.build();
         } else if(mode.equals(TEST_MODE)) {
             ConsoleResponseSender responseSender = new ConsoleResponseSender();
-            RequestReceiver requestReceiver = new RequestReceiver(requestParser, responseFormatter, responseSender, requestLogger);
+            RequestReceiver requestReceiver = new RequestReceiver(database, responseFormatter, responseSender, requestLogger);
             Console console = new Console(requestReceiver);
             console.start();
         }

@@ -2,9 +2,12 @@
   <configuration default="false" name="WeightCalculator" type="Application" factoryName="Application" nameIsGenerated="true">
     <option name="ALTERNATIVE_JRE_PATH" value="17" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <envs>
+      <env name="DISCORD_TOKEN" value="OTE0MTAyMDk2OTY0NDg5MjE2.YaIJ6w._jbDjlldXUex4PHx8Y9PrM5Ady8" />
+    </envs>
     <option name="MAIN_CLASS_NAME" value="WeightCalculator" />
     <module name="Ironman Weight" />
-    <option name="PROGRAM_PARAMETERS" value="test" />
+    <option name="PROGRAM_PARAMETERS" value="run" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

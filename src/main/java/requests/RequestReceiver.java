@@ -2,6 +2,8 @@ package requests;
 
 import com.google.firebase.database.ServerValue;
 import database.DatabaseException;
+import database.IDatabase;
+import database.SkyCryptDatabase;
 import logging.IRequestLogger;
 import profile.SkyblockProfile;
 import responses.IResponseFormatter;
@@ -9,30 +11,39 @@ import responses.IResponseSender;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class RequestReceiver implements IRequestReceiver {
 
-    public IRequestParser requestParser;
+    public IDatabase database;
     public IResponseFormatter responseFormatter;
     public IResponseSender responseSender;
     public IRequestLogger responseLogger;
 
-    public RequestReceiver(IRequestParser requestParser, IResponseFormatter responseFormatter, IResponseSender responseSender, IRequestLogger responseLogger) {
-        this.requestParser = requestParser;
+    public RequestReceiver(IDatabase database, IResponseFormatter responseFormatter, IResponseSender responseSender, IRequestLogger responseLogger) {
+        this.database = database;
         this.responseFormatter = responseFormatter;
         this.responseSender = responseSender;
         this.responseLogger = responseLogger;
     }
 
+    public SkyblockProfile getProfile(IRequest request) throws DatabaseException {
+        if (request.getOptions().size() == 2) {
+            String playerName = request.getOptions().get(0).getAsString();
+            String profileName = request.getOptions().get(1).getAsString();
+            return this.database.getProfile(playerName, profileName);
+        } else if(request.getOptions().size() == 1) {
+            String playerName = request.getOptions().get(0).getAsString();
+            return this.database.getProfile(playerName);
+        }
+        return null;
+    }
+
     @Override
     public void onNewRequest(IRequest request) {
-        String requestContent = request.getContent();
-        if (!isBotRequest(requestContent)) {
-            return;
-        }
         String response;
         try {
-            SkyblockProfile profile = requestParser.parseRequest(requestContent);
+            SkyblockProfile profile = getProfile(request);
             if(request instanceof DiscordRequest) {
                 Map<String, Object> logData = new HashMap<>();
                 logData.put("timestamp", ServerValue.TIMESTAMP);
@@ -52,14 +63,8 @@ public class RequestReceiver implements IRequestReceiver {
             response = responseFormatter.format(profile);
         } catch (DatabaseException e) {
             response = getErrorMessage(e.playerName, e.profileName, e.getMessage());
-        } catch (ParsingException e) {
-            response = e.getMessage();
         }
         this.responseSender.sendResponse(response, request);
-    }
-
-    private boolean isBotRequest(String request) {
-        return request.startsWith(RequestParser.REQUEST_COMMAND + " ");
     }
 
     private String getErrorMessage(String playerName, String profileName, String errorMessage) {

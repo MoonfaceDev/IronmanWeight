@@ -26,8 +26,8 @@ public class Bot {
         try {
             JDA jda = builder.build();
             jda.upsertCommand(new CommandData("ironweight", "Calculate the IronWeight of a skyblock profile")
-                    .addOption(OptionType.STRING, "Player name", "Minecraft player name")
-                    .addOption(OptionType.STRING, "Profile name", "Skyblock profile name")
+                    .addOption(OptionType.STRING, "player", "Minecraft player name")
+                    .addOption(OptionType.STRING, "profile", "Skyblock profile name")
             ).queue();
         } catch (LoginException e) {
             e.printStackTrace();
