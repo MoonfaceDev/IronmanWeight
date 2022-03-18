@@ -1,4 +1,4 @@
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import requests.DiscordRequest;
@@ -17,8 +17,8 @@ public class BotListenerAdapter extends ListenerAdapter {
     }
 
     @Override
-    public void onMessageReceived(@NotNull MessageReceivedEvent event) {
-        logger.info("Message from "+event.getAuthor().getName()+": "+event.getMessage().getContentDisplay());
+    public void onSlashCommand(@NotNull SlashCommandEvent event) {
+        logger.info("Message from "+event.getUser().getName()+": "+event.getCommandString());
         requestReceiver.onNewRequest(new DiscordRequest(event));
     }
 
