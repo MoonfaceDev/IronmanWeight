@@ -17,13 +17,12 @@ public class DiscordResponseSender implements IResponseSender {
         if(!(request instanceof DiscordRequest)) {
             return;
         }
-        ((DiscordRequest) request).getChannel().getName();
-        ((DiscordRequest) request).getChannel().sendMessageEmbeds(new EmbedBuilder()
+        ((DiscordRequest) request).getEvent().replyEmbeds((new EmbedBuilder()
                 .setDescription(response)
                 .setColor(messageColor)
                 .setFooter(messageFooter)
                 .setTimestamp(Instant.now())
                 .build()
-        ).queue();
+        )).queue();
     }
 }

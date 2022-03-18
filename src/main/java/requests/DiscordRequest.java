@@ -3,10 +3,12 @@ package requests;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.Event;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 
 public class DiscordRequest implements IRequest {
 
+    private final SlashCommandEvent event;
     private final MessageChannel channel;
     private final String content;
     private final User author;
@@ -14,11 +16,16 @@ public class DiscordRequest implements IRequest {
     private final Guild guild;
 
     public DiscordRequest(SlashCommandEvent event) {
+        this.event = event;
         this.channel = event.getChannel();
         this.content = event.getCommandString();
         this.author = event.getUser();
         this.isFromGuild = event.isFromGuild();
         this.guild = event.getGuild();
+    }
+
+    public SlashCommandEvent getEvent() {
+        return this.event;
     }
 
     @Override
