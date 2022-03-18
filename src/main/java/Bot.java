@@ -23,7 +23,7 @@ public class Bot {
     public void build() {
         try {
             JDA jda = builder.build();
-            jda.upsertCommand("ironweight", "Calculate the IronWeight of a skyblock profile");
+            jda.upsertCommand("ironweight", "Calculate the IronWeight of a skyblock profile").queue();
         } catch (LoginException e) {
             e.printStackTrace();
         }
