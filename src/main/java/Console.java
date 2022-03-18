@@ -1,25 +1,25 @@
-import requests.ConsoleRequest;
-import requests.IRequestReceiver;
+import handlers.console.IConsoleCommandHandler;
+import commands.ConsoleCommand;
 
 import java.util.Scanner;
 
 public class Console {
 
-    private final IRequestReceiver requestReceiver;
+    private final IConsoleCommandHandler commandHandler;
 
-    public Console(IRequestReceiver requestReceiver) {
-        this.requestReceiver = requestReceiver;
+    public Console(IConsoleCommandHandler commandHandler) {
+        this.commandHandler = commandHandler;
     }
 
     public void start() {
         System.out.println("Started messages console. Type \"exit\" to quit");
         Scanner input = new Scanner(System.in);
         while(true) {
-            String request = input.nextLine();
-            if(request.equals("exit")) {
+            String commandLine = input.nextLine();
+            if(commandLine.equals("exit")) {
                 return;
             }
-            this.requestReceiver.onNewRequest(new ConsoleRequest(request));
+            this.commandHandler.handleCommand(new ConsoleCommand(commandLine));
         }
     }
 

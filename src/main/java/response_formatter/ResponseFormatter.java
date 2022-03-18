@@ -1,4 +1,4 @@
-package responses;
+package response_formatter;
 
 import profile.SkyblockProfile;
 

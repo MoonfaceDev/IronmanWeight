@@ -7,7 +7,7 @@
     </envs>
     <option name="MAIN_CLASS_NAME" value="WeightCalculator" />
     <module name="Ironman Weight" />
-    <option name="PROGRAM_PARAMETERS" value="run" />
+    <option name="PROGRAM_PARAMETERS" value="test" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

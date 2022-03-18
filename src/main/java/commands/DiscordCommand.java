@@ -1,4 +1,4 @@
-package requests;
+package commands;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 
 import java.util.List;
 
-public class DiscordRequest implements IRequest {
+public class DiscordCommand {
 
     private final SlashCommandEvent event;
     private final MessageChannel channel;
@@ -18,7 +18,7 @@ public class DiscordRequest implements IRequest {
     private final boolean isFromGuild;
     private final Guild guild;
 
-    public DiscordRequest(SlashCommandEvent event) {
+    public DiscordCommand(SlashCommandEvent event) {
         this.event = event;
         this.channel = event.getChannel();
         this.content = event.getCommandString();
@@ -32,7 +32,6 @@ public class DiscordRequest implements IRequest {
         return this.event;
     }
 
-    @Override
     public String getContent() {
         return this.content;
     }

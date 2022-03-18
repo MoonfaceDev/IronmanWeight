@@ -10,11 +10,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
 
-public class FirebaseRequestLogger implements IRequestLogger {
+public class FirebaseCommandLogger implements ICommandLogger {
 
     DatabaseReference logsReference;
 
-    public FirebaseRequestLogger() throws IOException {
+    public FirebaseCommandLogger() throws IOException {
         FileInputStream serviceAccount =
                 new FileInputStream("serviceAccountKey.json");
 
