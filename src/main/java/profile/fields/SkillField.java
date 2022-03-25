@@ -1,6 +1,6 @@
 package profile.fields;
 
-public class SkillField extends Field<Number>{
+public class SkillField extends SimpleField<Number> {
 
     public static final int[] EXPERIENCE_REQUIRED = {
             50, 125, 200, 300, 500, 750, 1000, 1500, 2000, 3500,

@@ -1,6 +1,6 @@
 package profile.fields;
 
-public class ItemField extends Field<Boolean> {
+public class ItemField extends SimpleField<Boolean> {
 
     public String[] jsonPaths;
     public String itemID;

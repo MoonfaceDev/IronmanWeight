@@ -4,9 +4,10 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
 import profile.SkyblockProfile;
-import profile.fields.Field;
+import profile.fields.IField;
 import profile.fields.ItemField;
 import profile.fields.PetField;
+import profile.fields.SimpleField;
 import utils.HttpGetRequest;
 
 import java.io.IOException;
@@ -80,19 +81,26 @@ public class SkyCryptDatabase implements IDatabase {
         SkyblockProfile skyblockProfile = new SkyblockProfile();
         skyblockProfile.playerName = playerName;
         skyblockProfile.profileName = profileName;
-        skyblockProfile.gameMode = document.read("$.profiles."+profileID+".data.profile.game_mode");
-        for (Field<?> field : skyblockProfile.getFields()) {
-            try {
-                field.setValue(document.read("$.profiles." + profileID + "." + field.jsonPath));
-            } catch (PathNotFoundException e) {
-                logger.info(e.getMessage());
+        skyblockProfile.gameMode = document.read("$.profiles." + profileID + ".data.profile.game_mode");
+        for (IField field : skyblockProfile.fields.getFields()) {
+            if (field instanceof SimpleField<?>) {
+                try {
+                    SimpleField<?> simpleField = (SimpleField<?>) field;
+                    simpleField.setValue(document.read("$.profiles." + profileID + "." + simpleField.jsonPath));
+                } catch (PathNotFoundException e) {
+                    logger.info(e.getMessage());
+                }
             }
         }
-        for (ItemField itemField : skyblockProfile.getItemFields()) {
-            itemField.setValue(hasItem(document, profileID, itemField.jsonPaths, itemField.itemID));
+        for (IField field : skyblockProfile.items.getFields()) {
+            if (field instanceof ItemField itemField) {
+                itemField.setValue(hasItem(document, profileID, itemField.jsonPaths, itemField.itemID));
+            }
         }
-        for (PetField petField : skyblockProfile.getPetFields()) {
-            petField.setValue(getPet(document, profileID, petField.jsonPath, petField.petID));
+        for (IField field : skyblockProfile.pets.getFields()) {
+            if (field instanceof PetField petField) {
+                petField.setValue(getPet(document, profileID, petField.jsonPath, petField.petID));
+            }
         }
         return skyblockProfile;
     }

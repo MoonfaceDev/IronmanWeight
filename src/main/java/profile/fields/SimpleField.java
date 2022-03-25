@@ -1,10 +1,10 @@
 package profile.fields;
 
-public abstract class Field <T> {
+public abstract class SimpleField <T> implements IField {
     public T value;
     public String jsonPath;
 
-    public Field(String jsonPath) {
+    public SimpleField(String jsonPath) {
         this.jsonPath = jsonPath;
     }
 

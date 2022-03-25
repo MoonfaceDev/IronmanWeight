@@ -2,7 +2,7 @@ package profile.fields;
 
 import java.util.Map;
 
-public class PetField extends Field<Map<String, Object>>{
+public class PetField extends SimpleField<Map<String, Object>> {
 
     public String petID;
     public double[] tierWeights;

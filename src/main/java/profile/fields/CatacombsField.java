@@ -1,6 +1,6 @@
 package profile.fields;
 
-public class CatacombsField extends Field<Number> {
+public class CatacombsField extends SimpleField<Number> {
 
     public static final int[] EXPERIENCE_REQUIRED = {
             50, 75, 110, 160, 230, 330, 470, 670, 950, 1340,

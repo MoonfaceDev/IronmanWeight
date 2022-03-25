@@ -1,6 +1,6 @@
 package profile.fields;
 
-public class SlayerField extends Field<Integer> {
+public class SlayerField extends SimpleField<Integer> {
 
     public static final int[] EXPERIENCE_REQUIRED = {10, 30, 250, 1500, 5000, 20000, 100000, 400000, 1000000};
 

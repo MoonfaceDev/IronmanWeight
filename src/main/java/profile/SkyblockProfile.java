@@ -29,32 +29,32 @@ public class SkyblockProfile {
     public SlayerField enderman = new SlayerField("data.slayers.enderman.level.xp", 16.9, 2);
 
     //ADD NEW PET FIELD
-    public PetField[] pets = {
-            new PetField("data.pets", "SCATHA", new double[]{0,0,30,35,40,0}),
-            new PetField("data.pets", "BAL", new double[]{0,0,0,10,15,0}),
-            new PetField("data.pets", "PHOENIX", new double[]{0,0,0,15,20,0}),
-            new PetField("data.pets", "GOLDEN_DRAGON", new double[]{0,0,0,0,35,0}),
-            new PetField("data.pets", "ENDER_DRAGON", new double[]{0,0,0,40,45,0}),
-            new PetField("data.pets", "SNOWMAN", new double[]{0,0,0,0,5,0}),
-            new PetField("data.pets", "SPIRIT", new double[]{0,0,0,0,5,0}),
-            new PetField("data.pets", "GRIFFIN", new double[]{0,0,0,0,25,0}),
-            new PetField("data.pets", "ELEPHANT", new double[]{0,0,0,0,10,0}),
-            new PetField("data.pets", "MONKEY", new double[]{0,0,0,0,10,0}),
-            new PetField("data.pets", "ENDERMAN", new double[]{0,0,0,0,15,16}),
-            new PetField("data.pets", "BLUE_WHALE", new double[]{0,0,0,0,15,0}),
-            new PetField("data.pets", "BABY_YETI", new double[]{0,0,0,20,20,0}),
-            new PetField("data.pets", "BLACK_CAT", new double[]{0,0,0,0,10,0}),
-            new PetField("data.pets", "LION", new double[]{0,0,0,0,5,0}),
-            new PetField("data.pets", "BLAZE", new double[]{0,0,0,25,35,0}),
-            new PetField("data.pets", "TIGER", new double[]{0,0,0,0,15,0}),
-            new PetField("data.pets", "AMMONITE", new double[]{0,0,0,0,5,0}),
-            new PetField("data.pets", "SQUID", new double[]{0,0,0,0,10,0}),
-            new PetField("data.pets", "WOLF", new double[]{0,0,0,0,5,0}),
-            new PetField("data.pets", "WITHER_SKELETON", new double[]{0,0,0,0,5,0}),
-    };
+    public FieldCollection pets = new FieldCollection(new PetField[]{
+            new PetField("data.pets", "SCATHA", new double[]{0, 0, 30, 35, 40, 0}),
+            new PetField("data.pets", "BAL", new double[]{0, 0, 0, 10, 15, 0}),
+            new PetField("data.pets", "PHOENIX", new double[]{0, 0, 0, 15, 20, 0}),
+            new PetField("data.pets", "GOLDEN_DRAGON", new double[]{0, 0, 0, 0, 35, 0}),
+            new PetField("data.pets", "ENDER_DRAGON", new double[]{0, 0, 0, 40, 45, 0}),
+            new PetField("data.pets", "SNOWMAN", new double[]{0, 0, 0, 0, 5, 0}),
+            new PetField("data.pets", "SPIRIT", new double[]{0, 0, 0, 0, 5, 0}),
+            new PetField("data.pets", "GRIFFIN", new double[]{0, 0, 0, 0, 25, 0}),
+            new PetField("data.pets", "ELEPHANT", new double[]{0, 0, 0, 0, 10, 0}),
+            new PetField("data.pets", "MONKEY", new double[]{0, 0, 0, 0, 10, 0}),
+            new PetField("data.pets", "ENDERMAN", new double[]{0, 0, 0, 0, 15, 16}),
+            new PetField("data.pets", "BLUE_WHALE", new double[]{0, 0, 0, 0, 15, 0}),
+            new PetField("data.pets", "BABY_YETI", new double[]{0, 0, 0, 20, 20, 0}),
+            new PetField("data.pets", "BLACK_CAT", new double[]{0, 0, 0, 0, 10, 0}),
+            new PetField("data.pets", "LION", new double[]{0, 0, 0, 0, 5, 0}),
+            new PetField("data.pets", "BLAZE", new double[]{0, 0, 0, 25, 35, 0}),
+            new PetField("data.pets", "TIGER", new double[]{0, 0, 0, 0, 15, 0}),
+            new PetField("data.pets", "AMMONITE", new double[]{0, 0, 0, 0, 5, 0}),
+            new PetField("data.pets", "SQUID", new double[]{0, 0, 0, 0, 10, 0}),
+            new PetField("data.pets", "WOLF", new double[]{0, 0, 0, 0, 5, 0}),
+            new PetField("data.pets", "WITHER_SKELETON", new double[]{0, 0, 0, 0, 5, 0}),
+    });
 
     //ADD NEW ITEM FIELD
-    public ItemField[] items = {
+    public FieldCollection items = new FieldCollection(new ItemField[]{
             new ItemField("items.weapons", "ASPECT_OF_THE_END", 1),
             new ItemField("items.weapons", "ASPECT_OF_THE_VOID", 6),
             new ItemField(new String[]{"items.wardrobe_inventory", "items.armor", "items.inventory", "items.enderchest", "items.personal_vault", "items.storage"}, "POWER_WITHER_HELMET", 4),
@@ -216,64 +216,82 @@ public class SkyblockProfile {
             new ItemField("items.talismans", "SOULFLOW_SUPERCELL", 2),
             new ItemField("items.talismans", "SPIKED_ATROCITY", 1),
 
-    };
+    });
+
+    //ADD NEW SKILL
+    public FieldCollection skills = new FieldCollection(new IField[] {
+            taming,
+            farming,
+            mining,
+            combat,
+            foraging,
+            fishing,
+            enchanting,
+            alchemy,
+    });
+
+    //ADD NEW SLAYER
+    public FieldCollection slayers = new FieldCollection(new IField[] {
+            zombie,
+            spider,
+            wolf,
+            enderman,
+    });
+
     //ADD NEW FIELD
-    public Field<?>[] getFields() {
-        return new Field[]{catacombs, gemstonePowder, mithrilPowder, minionSlots, talismans,
-                petScore, taming, farming, mining, combat, foraging, fishing, enchanting,
-                alchemy, zombie, spider, wolf, enderman};
-    }
+    public FieldCollection fields = new FieldCollection(new IField[] {
+            catacombs,
+            gemstonePowder,
+            mithrilPowder,
+            minionSlots,
+            talismans,
+            petScore,
+            skills,
+            slayers,
+            items,
+            pets,
+    });
 
-    public PetField[] getPetFields() {
-        return pets;
-    }
+    //FACE FIELDS
 
-    public double getPetsWeight() {
-        double total = 0;
-        for(PetField petField : getPetFields()) {
-            total += petField.getWeight();
-        }
-        return total;
-    }
+    public ScaledField faceTaming = new ScaledField(taming, 8);
+    public ScaledField faceFarming = new ScaledField(farming, 9);
+    public ScaledField faceMining = new ScaledField(mining, 8);
+    public ScaledField faceCombat = new ScaledField(combat, 10);
+    public ScaledField faceForaging = new ScaledField(foraging, 12);
+    public ScaledField faceFishing = new ScaledField(fishing, 9);
+    public ScaledField faceEnchanting = new ScaledField(enchanting, 8);
+    public ScaledField faceAlchemy = new ScaledField(alchemy, 9);
 
-    public ItemField[] getItemFields() {
-        return items;
-    }
+    public FieldCollection faceSkills = new FieldCollection(new IField[] {
+            faceTaming,
+            faceFarming,
+            faceMining,
+            faceCombat,
+            faceForaging,
+            faceFishing,
+            faceEnchanting,
+            faceAlchemy,
+    });
 
-    public double getItemsWeight() {
-        double total = 0;
-        for(ItemField itemField : getItemFields()) {
-            total += itemField.getWeight();
-        }
-        return total;
-    }
+    public ScaledField faceZombie = new ScaledField(zombie, 12);
+    public ScaledField faceSpider = new ScaledField(spider, 20);
+    public ScaledField faceWolf = new ScaledField(wolf, 15);
+    public ScaledField faceEnderman = new ScaledField(enderman, 11);
 
-    public double getSkillsWeight() {
-        double total = 0;
-        Field<?>[] skillFields = new Field[]{taming, farming, mining, combat, foraging, fishing, enchanting, alchemy};
-        for(Field<?> skill : skillFields) {
-            total += skill.getWeight();
-        }
-        return total;
-    }
+    public FieldCollection faceSlayers = new FieldCollection(new IField[] {
+            faceZombie,
+            faceSpider,
+            faceWolf,
+            faceEnderman,
+    });
 
-    public double getSlayersWeight() {
-        double total = 0;
-        Field<?>[] slayerFields = new Field[]{zombie, spider, wolf, enderman};
-        for(Field<?> slayer : slayerFields) {
-            total += slayer.getWeight();
-        }
-        return total;
-    }
+    public ScaledField faceCatacombs = new ScaledField(catacombs, 7);
 
-    public double getTotalWeight() {
-        double total = 0;
-        for(Field<?> field : getFields()) {
-            total += field.getWeight();
-        }
-        total += getItemsWeight();
-        total += getPetsWeight();
-        return total;
-    }
+    public FieldCollection faceFields = new FieldCollection(new IField[] {
+            faceCatacombs,
+            faceSkills,
+            faceSlayers,
+    });
 
 }

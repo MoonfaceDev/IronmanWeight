@@ -2,7 +2,7 @@ import database.SkyCryptDatabase;
 import handlers.console.ConsoleCommandHandler;
 import handlers.discord.DiscordCommandHandler;
 import logging.FirebaseCommandLogger;
-import response_formatter.ResponseFormatter;
+import response_formatter.ResponseFormatterFactory;
 
 import java.io.IOException;
 
@@ -19,14 +19,14 @@ public class WeightCalculator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ResponseFormatter responseFormatter = new ResponseFormatter();
+        ResponseFormatterFactory responseFormatterFactory = new ResponseFormatterFactory();
         String mode = args[0];
         if(mode.equals(RUN_MODE)) {
-            DiscordCommandHandler commandHandler = new DiscordCommandHandler(database, responseFormatter, commandLogger);
+            DiscordCommandHandler commandHandler = new DiscordCommandHandler(database, responseFormatterFactory, commandLogger);
             Bot bot = new Bot(new BotListenerAdapter(commandHandler));
             bot.build();
         } else if(mode.equals(TEST_MODE)) {
-            ConsoleCommandHandler commandHandler = new ConsoleCommandHandler(database, responseFormatter);
+            ConsoleCommandHandler commandHandler = new ConsoleCommandHandler(database, responseFormatterFactory);
             Console console = new Console(commandHandler);
             console.start();
         }

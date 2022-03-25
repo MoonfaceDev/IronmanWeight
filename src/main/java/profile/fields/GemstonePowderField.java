@@ -1,6 +1,6 @@
 package profile.fields;
 
-public class GemstonePowderField extends Field<Integer>{
+public class GemstonePowderField extends SimpleField<Integer> {
     public GemstonePowderField(String jsonPath) {
         super(jsonPath);
         this.value = 0;

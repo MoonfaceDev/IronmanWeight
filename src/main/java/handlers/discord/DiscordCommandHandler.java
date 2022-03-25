@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import profile.SkyblockProfile;
 import commands.DiscordCommand;
 import response_formatter.IResponseFormatter;
+import response_formatter.ResponseFormatterFactory;
 
 import java.awt.*;
 import java.time.Instant;
@@ -20,13 +21,13 @@ public class DiscordCommandHandler implements IDiscordCommandHandler {
     private static final String messageFooter = "Ironman Weight • Created By nomface";
 
     public IDatabase database;
-    public IResponseFormatter responseFormatter;
+    public ResponseFormatterFactory responseFormatterFactory;
     public ICommandLogger commandLogger;
 
 
-    public DiscordCommandHandler(IDatabase database, IResponseFormatter responseFormatter, ICommandLogger commandLogger) {
+    public DiscordCommandHandler(IDatabase database, ResponseFormatterFactory responseFormatterFactory, ICommandLogger commandLogger) {
         this.database = database;
-        this.responseFormatter = responseFormatter;
+        this.responseFormatterFactory = responseFormatterFactory;
         this.commandLogger = commandLogger;
     }
 
@@ -58,6 +59,7 @@ public class DiscordCommandHandler implements IDiscordCommandHandler {
         try {
             SkyblockProfile profile = getProfile(command);
             logCommand(command, profile);
+            IResponseFormatter responseFormatter = responseFormatterFactory.build(command);
             response = responseFormatter.format(profile);
         } catch (DatabaseException e) {
             response = getErrorMessage(e.playerName, e.profileName, e.getMessage());
@@ -71,7 +73,8 @@ public class DiscordCommandHandler implements IDiscordCommandHandler {
         logData.put("player", profile.playerName);
         logData.put("profile", profile.profileName);
         logData.put("author", command.getAuthor().getAsTag());
-        logData.put("weight", profile.getTotalWeight());
+        logData.put("ironweight", profile.fields.getWeight());
+        logData.put("faceweight", profile.faceFields.getWeight());
         if(command.isFromGuild()) {
             logData.put("guild", command.getGuild().getName());
             logData.put("channel", command.getChannel().getName());

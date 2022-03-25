@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class TalismansField extends Field<List<Map<String, Object>>>{
+public class TalismansField extends SimpleField<List<Map<String, Object>>> {
     public TalismansField(String jsonPath) {
         super(jsonPath);
         this.value = new ArrayList<>();

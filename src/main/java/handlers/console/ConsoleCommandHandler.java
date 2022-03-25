@@ -1,39 +1,30 @@
 package handlers.console;
 
+import commands.ConsoleCommand;
 import database.DatabaseException;
 import database.IDatabase;
 import profile.SkyblockProfile;
-import commands.ConsoleCommand;
-import response_formatter.IResponseFormatter;
+import response_formatter.ResponseFormatterFactory;
 
 public class ConsoleCommandHandler implements IConsoleCommandHandler {
 
     private static final String messageFooter = "Ironman Weight • Created By nomface";
-    private static final String IRONWEIGHT_COMMAND = "ironweight";
 
     public IDatabase database;
-    public IResponseFormatter responseFormatter;
+    public ResponseFormatterFactory responseFormatterFactory;
 
 
 
-    public ConsoleCommandHandler(IDatabase database, IResponseFormatter responseFormatter) {
+    public ConsoleCommandHandler(IDatabase database, ResponseFormatterFactory responseFormatterFactory) {
         this.database = database;
-        this.responseFormatter = responseFormatter;
+        this.responseFormatterFactory = responseFormatterFactory;
     }
 
     public SkyblockProfile getProfile(ConsoleCommand command) throws DatabaseException {
-        String[] words = command.getContent().split("\\s");
-        if(words[0].equals(IRONWEIGHT_COMMAND)) {
-            if (words.length == 3) {
-                String playerName = words[1];
-                String profileName = words[2];
-                return database.getProfile(playerName, profileName);
-            } else if(words.length == 2) {
-                String playerName = words[1];
-                return database.getProfile(playerName);
-            }
+        if (command.getProfile() == null) {
+            return database.getProfile(command.getPlayer());
         }
-        return null;
+        return database.getProfile(command.getPlayer(), command.getProfile());
     }
 
     private String getErrorMessage(String playerName, String profileName, String errorMessage) {
@@ -51,7 +42,7 @@ public class ConsoleCommandHandler implements IConsoleCommandHandler {
         String response;
         try {
             SkyblockProfile profile = getProfile(command);
-            response = responseFormatter.format(profile);
+            response = responseFormatterFactory.build(command).format(profile);
         } catch (DatabaseException e) {
             response = getErrorMessage(e.playerName, e.profileName, e.getMessage());
         }

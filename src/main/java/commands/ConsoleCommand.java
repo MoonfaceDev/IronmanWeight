@@ -1,14 +1,47 @@
 package commands;
 
-public class ConsoleCommand {
+public class ConsoleCommand implements ICommand {
 
-    private final String content;
+    private final String name;
+    private final String player;
+    private final String profile;
+    private final String rawContent;
 
-    public ConsoleCommand(String content) {
-        this.content = content;
+    public ConsoleCommand(String name, String player, String profile, String rawContent) {
+        this.name = name;
+        this.player = player;
+        this.profile = profile;
+        this.rawContent = rawContent;
     }
 
-    public String getContent() {
-        return this.content;
+    public static ConsoleCommand fromRawContent(String rawContent) {
+        String[] words = rawContent.split("\\s");
+        if (words.length == 3) {
+            String name = words[0];
+            String playerName = words[1];
+            String profileName = words[2];
+            return new ConsoleCommand(name, playerName, profileName, rawContent);
+        } else if(words.length == 2) {
+            String name = words[0];
+            String playerName = words[1];
+            return new ConsoleCommand(name, playerName, null, rawContent);
+        }
+        return null;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPlayer() {
+        return player;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public String getRawContent() {
+        return this.rawContent;
     }
 }

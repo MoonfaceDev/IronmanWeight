@@ -19,7 +19,7 @@ public class Console {
             if(commandLine.equals("exit")) {
                 return;
             }
-            this.commandHandler.handleCommand(new ConsoleCommand(commandLine));
+            this.commandHandler.handleCommand(ConsoleCommand.fromRawContent(commandLine));
         }
     }
 

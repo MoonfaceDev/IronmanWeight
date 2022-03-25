@@ -8,11 +8,12 @@ import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 
 import java.util.List;
 
-public class DiscordCommand {
+public class DiscordCommand implements ICommand {
 
     private final SlashCommandEvent event;
     private final MessageChannel channel;
-    private final String content;
+    private final String rawContent;
+    private final String name;
     private final List<OptionMapping> options;
     private final User author;
     private final boolean isFromGuild;
@@ -21,7 +22,8 @@ public class DiscordCommand {
     public DiscordCommand(SlashCommandEvent event) {
         this.event = event;
         this.channel = event.getChannel();
-        this.content = event.getCommandString();
+        this.rawContent = event.getCommandString();
+        this.name = event.getName();
         this.options = event.getOptions();
         this.author = event.getUser();
         this.isFromGuild = event.isFromGuild();
@@ -32,8 +34,12 @@ public class DiscordCommand {
         return this.event;
     }
 
-    public String getContent() {
-        return this.content;
+    public String getRawContent() {
+        return this.rawContent;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public List<OptionMapping> getOptions() {
