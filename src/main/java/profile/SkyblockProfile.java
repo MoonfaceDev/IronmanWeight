@@ -252,8 +252,29 @@ public class SkyblockProfile {
             pets,
     });
 
-    //FACE FIELDS
+    //ADD SIMPLE FIELDS (DIRECTLY DERIVED FROM DATABASE)
+    public SimpleField<?>[] simpleFields = new SimpleField[] {
+            catacombs,
+            gemstonePowder,
+            mithrilPowder,
+            minionSlots,
+            talismans,
+            petScore,
+            taming,
+            farming,
+            mining,
+            combat,
+            foraging,
+            fishing,
+            enchanting,
+            alchemy,
+            zombie,
+            spider,
+            wolf,
+            enderman,
+    };
 
+    //FACE FIELDS
     public ScaledField faceTaming = new ScaledField(taming, 8);
     public ScaledField faceFarming = new ScaledField(farming, 9);
     public ScaledField faceMining = new ScaledField(mining, 8);
@@ -261,6 +282,7 @@ public class SkyblockProfile {
     public ScaledField faceForaging = new ScaledField(foraging, 12);
     public ScaledField faceFishing = new ScaledField(fishing, 9);
     public ScaledField faceEnchanting = new ScaledField(enchanting, 8);
+
     public ScaledField faceAlchemy = new ScaledField(alchemy, 9);
 
     public FieldCollection faceSkills = new FieldCollection(new IField[] {
@@ -273,10 +295,10 @@ public class SkyblockProfile {
             faceEnchanting,
             faceAlchemy,
     });
-
     public ScaledField faceZombie = new ScaledField(zombie, 12);
     public ScaledField faceSpider = new ScaledField(spider, 20);
     public ScaledField faceWolf = new ScaledField(wolf, 15);
+
     public ScaledField faceEnderman = new ScaledField(enderman, 11);
 
     public FieldCollection faceSlayers = new FieldCollection(new IField[] {
@@ -293,5 +315,4 @@ public class SkyblockProfile {
             faceSkills,
             faceSlayers,
     });
-
 }

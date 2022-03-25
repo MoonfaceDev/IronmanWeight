@@ -82,14 +82,11 @@ public class SkyCryptDatabase implements IDatabase {
         skyblockProfile.playerName = playerName;
         skyblockProfile.profileName = profileName;
         skyblockProfile.gameMode = document.read("$.profiles." + profileID + ".data.profile.game_mode");
-        for (IField field : skyblockProfile.fields.getFields()) {
-            if (field instanceof SimpleField<?>) {
-                try {
-                    SimpleField<?> simpleField = (SimpleField<?>) field;
-                    simpleField.setValue(document.read("$.profiles." + profileID + "." + simpleField.jsonPath));
-                } catch (PathNotFoundException e) {
-                    logger.info(e.getMessage());
-                }
+        for (SimpleField<?> field : skyblockProfile.simpleFields) {
+            try {
+                field.setValue(document.read("$.profiles." + profileID + "." + field.jsonPath));
+            } catch (PathNotFoundException e) {
+                logger.info(e.getMessage());
             }
         }
         for (IField field : skyblockProfile.items.getFields()) {
