@@ -15,6 +15,10 @@ public class ConsoleCommand implements ICommand {
     }
 
     public static ConsoleCommand fromRawContent(String rawContent) {
+        if (!rawContent.startsWith("/")) {
+            return null;
+        }
+        rawContent = rawContent.substring(1);
         String[] words = rawContent.split("\\s");
         if (words.length == 3) {
             String name = words[0];

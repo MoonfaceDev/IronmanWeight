@@ -13,7 +13,7 @@ public class FaceWeightResponseFormatter implements IResponseFormatter {
         double weight = profile.faceFields.getWeight();
         return ":pick: " + profile.playerName + " | " + profile.profileName + " " + getGameModeEmoji(profile.gameMode) +
                 "\n**Total Weight:** " + weightFormat.format(weight) + "\n" +
-                "\n**Skills:** " + weightFormat.format(profile.faceSkills.getFields()) +
+                "\n**Skills:** " + weightFormat.format(profile.faceSkills.getWeight()) +
                 "\n - Taming: " + weightFormat.format(profile.faceTaming.getWeight()) +
                 "\n - Farming: " + weightFormat.format(profile.faceFarming.getWeight()) +
                 "\n - Mining: " + weightFormat.format(profile.faceMining.getWeight()) +
