@@ -278,11 +278,10 @@ public class SkyblockProfile {
     public ScaledField faceTaming = new ScaledField(taming, 8);
     public ScaledField faceFarming = new ScaledField(farming, 9);
     public ScaledField faceMining = new ScaledField(mining, 8);
-    public ScaledField faceCombat = new ScaledField(combat, 10);
+    public TransformedField faceCombat = new TransformedField(combat, (input -> Math.pow(input, 1.8) / 16));
     public ScaledField faceForaging = new ScaledField(foraging, 12);
     public ScaledField faceFishing = new ScaledField(fishing, 9);
     public ScaledField faceEnchanting = new ScaledField(enchanting, 8);
-
     public ScaledField faceAlchemy = new ScaledField(alchemy, 9);
 
     public FieldCollection faceSkills = new FieldCollection(new IField[] {
@@ -295,11 +294,11 @@ public class SkyblockProfile {
             faceEnchanting,
             faceAlchemy,
     });
-    public ScaledField faceZombie = new ScaledField(zombie, 12);
-    public ScaledField faceSpider = new ScaledField(spider, 20);
-    public ScaledField faceWolf = new ScaledField(wolf, 15);
 
-    public ScaledField faceEnderman = new ScaledField(enderman, 11);
+    public ScaledField faceZombie = new ScaledField(zombie, 9);
+    public ScaledField faceSpider = new ScaledField(spider, 12);
+    public ScaledField faceWolf = new ScaledField(wolf, 14);
+    public ScaledField faceEnderman = new ScaledField(enderman, 9);
 
     public FieldCollection faceSlayers = new FieldCollection(new IField[] {
             faceZombie,
